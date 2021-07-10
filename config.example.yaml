@@ -1,0 +1,24 @@
+apikeys:
+  - user: foo
+    max_per_minute: 90
+    tornkey: key1
+    currently_remaining: -1
+    active: true
+    types:
+      - faction
+      - general
+  - user: bar
+    max_per_minute: 75
+    tornkey: key2
+    currently_remaining: -1
+    active: true
+    types:
+      - faction
+      - general
+  - user: baz
+    max_per_minute: 60
+    tornkey: key3
+    currently_remaining: -1
+    active: true
+    types:
+      - general
