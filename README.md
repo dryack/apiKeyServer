@@ -19,7 +19,7 @@ PHP, Python, and Ruby. I hear that JS is starting to receive support now as well
 * Leveled key usage: all else being equal, the key with the highest number of uses remaining will be returned to the 
 client first.
 * Because the server's minute may not really be synced to Torn's minute, sometimes the client will receive a Too Many 
-Requests error code from the API. In this case the client Clients may tell the server to kill a key for the current 
+Requests error code from the API. In this case the client may tell the server to kill a key for the current 
 minute.
 * For a wide number of reasons, a key may become invalid (user has gone inactive or changed their key). If the client
 receives an error code from the API that signals this, it may issue the server a command to permanently kill the key,
