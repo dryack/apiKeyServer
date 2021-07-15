@@ -42,7 +42,7 @@ var (
 	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	certFile = flag.String("cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("key_file", "", "The TLS key file")
-	//port       = flag.Int("port", 50051, "The server port")
+	//port       	= flag.Int("port", 50051, "The server port")
 	port          = flag.Int("port", 50052, "The server port")
 	keys          Keys
 	exhausted     = 0
@@ -54,6 +54,7 @@ var (
 var Log zerolog.Logger
 var Sampled zerolog.Logger
 
+// TODO: Options for logging; turn it off, change logfile location, etc.
 func init() {
 	consoleLogging := flag.Bool("console", false, "display to console in addition to log")
 	debug := flag.Bool("debug", false, "sets log level to debug")
@@ -110,7 +111,7 @@ func main() {
 			Str("types", strings.Join(keys.Apikeys[k].Types, ",")).
 			Msg("")
 	}
-	err = tWriter.Flush()
+	err = tWriter.Flush() // sends column-formatted output to stdio
 	if err != nil {
 		panic(err)
 	}

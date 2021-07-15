@@ -24,6 +24,14 @@ import (
 	"time"
 )
 
+// TODO: (Optionally) return a message signalling keys are exhausted, this would permit the client program to continue
+// processing. Currently, we just wait until keys again become available before returning a result. This forces the client
+// to wait for a result or timeout. With an appropriate timeout, this has worked fine for me so far, but seems limiting as
+// a more general purpose solution.
+
+// TODO: Request multiple keys in a single request. It may be more efficient for the client to request X keys of type Y at
+// once.
+
 type Keys struct {
 	TotalPerMinute int
 	Apikeys        []struct {
