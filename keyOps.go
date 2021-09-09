@@ -61,6 +61,7 @@ func initKeys(keys *Keys) {
 
 // any keys have uses left right now?
 func anyLeft(keys Keys, keyType string) bool {
+	defer timeTrack(time.Now(), "anyLeft()") // debug
 	Log.Debug().Caller().Str("keyType", keyType).Msg("anyLeft()")
 	for _, key := range keys.Apikeys {
 		if contains(key.Types, keyType) {
@@ -77,6 +78,7 @@ func anyLeft(keys Keys, keyType string) bool {
 
 // TODO: can i use a heap-based priority queue and replace most of this logic - possibly even most of keyOps.go
 func levelKeyUses(keys *Keys, keyType string) (string, string) {
+	defer timeTrack(time.Now(), "levelKeyUses()") // debug
 	Log.Debug().Caller().Str("keyType", keyType).Msg("levelKeyUses()")
 
 	max := -1
@@ -134,6 +136,7 @@ func next(keys *Keys, keyType string) (string, string) {
 }
 
 func killKey(keys *Keys, keyToKill string) {
+	defer timeTrack(time.Now(), "killKey()")
 	Log.Debug().Caller().
 		Str("key", keyToKill).
 		Msg("killKey()")
@@ -146,6 +149,7 @@ func killKey(keys *Keys, keyToKill string) {
 }
 
 func permKillKey(keys *Keys, keyToKill string) {
+	defer timeTrack(time.Now(), "permKillKey()")
 	Log.Debug().Caller().
 		Str("key", keyToKill).
 		Msg("permKillKey()")

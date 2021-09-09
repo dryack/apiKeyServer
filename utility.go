@@ -21,6 +21,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
 // stolen from: https://gist.github.com/NorbertFenk/7bed6760198800207e84f141c41d93c7
@@ -48,4 +49,9 @@ func exitHandler() {
 	}
 	Log.Info().Str("exhaustions", strconv.Itoa(exhausted)).Msg("")
 	//fmt.Print("Number of exhaustions: " + strconv.Itoa(exhausted) + "\n")
+}
+
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	Log.Debug().Msgf("%s took %s", name, elapsed)
 }
