@@ -87,7 +87,7 @@ func init() {
 }
 
 func main() {
-	tWriter := tabwriter.NewWriter(os.Stdout, 0, 8, 1, ' ', 0)
+	tabWriter := tabwriter.NewWriter(os.Stdout, 0, 8, 1, ' ', 0)
 	file, err := ioutil.ReadFile("./configs/config.yaml")
 	if err != nil {
 		panic(err)
@@ -102,6 +102,7 @@ func main() {
 	initKeys(&keys)
 
 	Log.Info().Msg("Torn API Key server " + serverVersion)
+	//TODO: I hate all this output being here - let's move it elsewhere (Log.Info stuff is fine)
 	fmt.Println("lamashtu's Torn API Key server " + serverVersion)
 	Log.Info().
 		Str("max keys/min", strconv.Itoa(keys.TotalPerMinute)).
@@ -109,14 +110,14 @@ func main() {
 		Msg("")
 	_, _ = fmt.Fprintf(os.Stdout, "%v keys available for use, up to %v queries per minute\n", len(keys.Apikeys), keys.TotalPerMinute)
 	for k := range keys.Apikeys {
-		_, _ = fmt.Fprintf(tWriter, "%s\t%v\t%s\t%s%s\n", keys.Apikeys[k].User, keys.Apikeys[k].MaxPerMinute, " uses/min", " types: ", keys.Apikeys[k].Types)
+		_, _ = fmt.Fprintf(tabWriter, "%s\t%v\t%s\t%s%s\n", keys.Apikeys[k].User, keys.Apikeys[k].MaxPerMinute, " uses/min", " types: ", keys.Apikeys[k].Types)
 		Log.Info().
 			Str("keyUser", keys.Apikeys[k].User).
 			Str("keyMaxUsers", strconv.Itoa(keys.Apikeys[k].MaxPerMinute)).
 			Str("types", strings.Join(keys.Apikeys[k].Types, ",")).
 			Msg("")
 	}
-	err = tWriter.Flush() // sends column-formatted output to stdio
+	err = tabWriter.Flush() // sends column-formatted output to stdio
 	if err != nil {
 		panic(err)
 	}
