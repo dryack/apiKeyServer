@@ -44,19 +44,20 @@ var (
 	certFile = flag.String("cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("key_file", "", "The TLS key file")
 	// port       	= flag.Int("port", 50051, "The server port")
-	port          = flag.Int("port", 50052, "The server port")
+	port          = flag.Int("port", 50052, "The server port") // for remote debugging purposes
 	keys          Keys
 	exhausted     = 0
 	t             int64
 	serverVersion = "v1.22"
-	Done          = make(chan bool)                        // necessary because we can't pass args to exitHandler()
-	Ticker        = time.NewTicker(100 * time.Millisecond) // set up ticker for checking the minute
-	mutexKeys     = sync.RWMutex{}
+	// Log setting up the logger object for global access
+	Log     zerolog.Logger
+	Sampled zerolog.Logger
+	// Set up ticker and teardown of go routine
+	Done   = make(chan bool)                        // necessary because we can't pass args to exitHandler()
+	Ticker = time.NewTicker(250 * time.Millisecond) // set up ticker for checking the minute
+	// lock keys when needed
+	mutexKeys = sync.RWMutex{}
 )
-
-// Log setting up the logger object for global access
-var Log zerolog.Logger
-var Sampled zerolog.Logger
 
 // TODO: Options for logging; turn it off, change logfile location, etc.
 func init() {
@@ -97,7 +98,7 @@ func main() {
 		panic(err)
 	}
 
-	t = time.Now().UTC().Unix() + 60.0
+	t = time.Now().UTC().UnixMilli() + 60000 // 1 minute
 	initKeys(&keys)
 
 	Log.Info().Msg("Torn API Key server " + serverVersion)

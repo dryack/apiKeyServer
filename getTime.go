@@ -22,7 +22,7 @@ import "time"
 
 func getTime() int64 {
 	Log.Debug().Caller().Msg("getTime()")
-	newTime := time.Now().UTC().Unix()
+	newTime := time.Now().UTC().UnixMilli()
 	return newTime
 }
 
