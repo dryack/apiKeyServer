@@ -33,6 +33,7 @@ import (
 	"os/signal"
 	"strconv"
 	"strings"
+	"sync"
 	"syscall"
 	"text/tabwriter"
 	"time"
@@ -42,12 +43,15 @@ var (
 	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	certFile = flag.String("cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("key_file", "", "The TLS key file")
-	//port       	= flag.Int("port", 50051, "The server port")
+	// port       	= flag.Int("port", 50051, "The server port")
 	port          = flag.Int("port", 50052, "The server port")
 	keys          Keys
 	exhausted     = 0
 	t             int64
-	serverVersion = "v1.21"
+	serverVersion = "v1.22"
+	Done          = make(chan bool)                        // necessary because we can't pass args to exitHandler()
+	Ticker        = time.NewTicker(100 * time.Millisecond) // set up ticker for checking the minute
+	mutexKeys     = sync.RWMutex{}
 )
 
 // Log setting up the logger object for global access
@@ -83,7 +87,7 @@ func init() {
 
 func main() {
 	tWriter := tabwriter.NewWriter(os.Stdout, 0, 8, 1, ' ', 0)
-	file, err := ioutil.ReadFile("./config.yaml")
+	file, err := ioutil.ReadFile("./configs/config.yaml")
 	if err != nil {
 		panic(err)
 	}
@@ -161,6 +165,9 @@ func main() {
 	Log.Info().
 		Str("port", strconv.Itoa(*port)).
 		Msg("Now serving keys")
+
+	// watching the time so we can re-init keys each minute
+	go checkMinute(&keys)
 
 	_ = grpcServer.Serve(lis)
 

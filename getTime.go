@@ -29,10 +29,17 @@ func getTime() int64 {
 // TODO this can probably be better (and more accurately) accomplished using https://gobyexample.com/tickers
 // if a minute has passed, we can reset CurrentlyRemaining in Keys
 func checkMinute(keys *Keys) {
-	Log.Debug().Caller().Msg("checkMinute()")
-	newT := getTime()
-	if newT > t {
-		t = newT + 60
-		initKeys(keys)
+	for {
+		select {
+		case <-Done:
+			return
+		case <-Ticker.C:
+			Log.Debug().Caller().Msg("checkMinute()")
+			newT := getTime()
+			if newT > t {
+				t = newT + 60
+				initKeys(keys)
+			}
+		}
 	}
 }

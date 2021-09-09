@@ -36,6 +36,7 @@ func contains(s []string, e string) bool {
 func exitHandler() {
 	Log.Info().Msg("Exiting by user command.")
 	Log.Debug().Caller().Msg("exitHandler()")
+	Done <- true
 	fmt.Print("\n\n")
 	for _, key := range keys.Apikeys {
 		Log.Info().

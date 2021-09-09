@@ -49,6 +49,10 @@ type Keys struct {
 func initKeys(keys *Keys) {
 	Log.Info().Msg("Initializing keys")
 	Log.Debug().Caller().Msg("initKeys()")
+
+	mutexKeys.Lock()
+	defer mutexKeys.Unlock()
+
 	for i := range keys.Apikeys {
 		keys.TotalPerMinute += keys.Apikeys[i].MaxPerMinute
 		keys.Apikeys[i].CurrentlyRemaining = keys.Apikeys[i].MaxPerMinute
@@ -71,6 +75,7 @@ func anyLeft(keys Keys, keyType string) bool {
 	return false
 }
 
+// TODO: can i use a heap-based priority queue and replace most of this logic - possibly even most of keyOps.go
 func levelKeyUses(keys *Keys, keyType string) (string, string) {
 	Log.Debug().Caller().Str("keyType", keyType).Msg("levelKeyUses()")
 
@@ -104,7 +109,7 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 // return a key for use by requester
 func next(keys *Keys, keyType string) (string, string) {
 	Log.Debug().Caller().Str("keyType", keyType).Msg("next()")
-	checkMinute(keys)
+	//checkMinute(keys)
 	firstrun := 0
 	for {
 		Log.Debug().Str("runs", strconv.Itoa(firstrun)).Msg("next loop running")
@@ -124,7 +129,7 @@ func next(keys *Keys, keyType string) (string, string) {
 		firstrun++
 		//print(".")
 		time.Sleep(1 * time.Second)
-		checkMinute(keys)
+		//checkMinute(keys)
 	}
 }
 

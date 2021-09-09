@@ -5,8 +5,8 @@
 /.idea/remote-targets.xml
 /.idea/vcs.xml
 /.idea/workspace.xml
-/config.yaml
-/config.yaml.old
+/configs/config.yaml
+/configs/config.yaml.old
 /.idea/dictionaries/dryack.xml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/inspectionProfiles/
