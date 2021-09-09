@@ -26,7 +26,6 @@ func getTime() int64 {
 	return newTime
 }
 
-// TODO this can probably be better (and more accurately) accomplished using https://gobyexample.com/tickers
 // if a minute has passed, we can reset CurrentlyRemaining in Keys
 func checkMinute(keys *Keys) {
 	for {
@@ -37,7 +36,7 @@ func checkMinute(keys *Keys) {
 			Log.Debug().Caller().Msg("checkMinute()")
 			newT := getTime()
 			if newT > t {
-				t = newT + 60
+				t = newT + 60000 // 1 minute (using UnixMilli() )
 				initKeys(keys)
 			}
 		}
