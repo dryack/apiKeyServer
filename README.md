@@ -36,3 +36,8 @@ a more general purpose solution.
 
 - [ ] Request multiple keys in a single request. It may be more efficient for the client to request X keys of type Y at
 once.
+
+##### Requirements
+golang >= 1.16
+
+only tested on linux, but might work on some other OS
