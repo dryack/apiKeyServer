@@ -109,8 +109,8 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 // return a key for use by requester
 func next(keys *Keys, keyType string) (string, string) {
 	Log.Debug().Caller().Str("keyType", keyType).Msg("next()")
-	//checkMinute(keys)
 	firstrun := 0
+
 	for {
 		Log.Debug().Str("runs", strconv.Itoa(firstrun)).Msg("next loop running")
 		if anyLeft(*keys, keyType) {
@@ -120,6 +120,8 @@ func next(keys *Keys, keyType string) (string, string) {
 			Sampled.Debug().Msg(keysForSample)
 			return key, name
 		}
+		// we're out of keys.  if this is our first time at exhaustion this minute, print a message.  subsequent loops
+		// where keys are still exhausted will be silent during non-debug operation
 		if firstrun == 0 {
 			Log.Info().Msg("Waiting for key to become available")
 			exhausted += 1
@@ -127,9 +129,7 @@ func next(keys *Keys, keyType string) (string, string) {
 			//fmt.Print("Waiting for key to become available")
 		}
 		firstrun++
-		//print(".")
 		time.Sleep(1 * time.Second)
-		//checkMinute(keys)
 	}
 }
 
