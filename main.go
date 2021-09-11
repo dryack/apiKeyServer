@@ -42,7 +42,7 @@ var (
 	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	certFile = flag.String("cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("key_file", "", "The TLS key file")
-	// port       	= flag.Int("port", 50051, "The server port")
+	// port     = flag.Int("port", 50051, "The server port")
 	port          = flag.Int("port", 50052, "The server port") // for remote debugging purposes
 	keys          Keys
 	exhausted     = 0

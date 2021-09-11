@@ -50,7 +50,6 @@ func exitHandler() {
 			Msg("")
 	}
 	Log.Info().Str("exhaustions", strconv.Itoa(exhausted)).Msg("")
-	//fmt.Print("Number of exhaustions: " + strconv.Itoa(exhausted) + "\n")
 }
 
 func timeTrack(start time.Time, name string) {
