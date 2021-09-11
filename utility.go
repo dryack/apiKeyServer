@@ -20,7 +20,10 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
+	"strings"
+	"text/tabwriter"
 	"time"
 )
 
@@ -54,4 +57,27 @@ func exitHandler() {
 func timeTrack(start time.Time, name string) {
 	elapsed := time.Since(start)
 	Log.Debug().Msgf("%s took %s", name, elapsed)
+}
+
+func startMessages(tabWriter *tabwriter.Writer, err error) error {
+	Log.Info().Msg("Torn API Key server " + serverVersion)
+	fmt.Println("lamashtu's Torn API Key server " + serverVersion)
+	Log.Info().
+		Str("max keys/min", strconv.Itoa(keys.TotalPerMinute)).
+		Str("keys available", strconv.Itoa(len(keys.Apikeys))).
+		Msg("")
+	_, _ = fmt.Fprintf(os.Stdout, "%v keys available for use, up to %v queries per minute\n", len(keys.Apikeys), keys.TotalPerMinute)
+	for k := range keys.Apikeys {
+		_, _ = fmt.Fprintf(tabWriter, "%s\t%v\t%s\t%s%s\n", keys.Apikeys[k].User, keys.Apikeys[k].MaxPerMinute, " uses/min", " types: ", keys.Apikeys[k].Types)
+		Log.Info().
+			Str("keyUser", keys.Apikeys[k].User).
+			Str("keyMaxUsers", strconv.Itoa(keys.Apikeys[k].MaxPerMinute)).
+			Str("types", strings.Join(keys.Apikeys[k].Types, ",")).
+			Msg("")
+	}
+	err = tabWriter.Flush() // sends column-formatted output to stdio
+	if err != nil {
+		panic(err)
+	}
+	return err
 }

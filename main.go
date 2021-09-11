@@ -32,7 +32,6 @@ import (
 	"os"
 	"os/signal"
 	"strconv"
-	"strings"
 	"sync"
 	"syscall"
 	"text/tabwriter"
@@ -101,30 +100,11 @@ func main() {
 	t = time.Now().UTC().UnixMilli() + 60000 // 1 minute
 	initKeys(&keys)
 
-	Log.Info().Msg("Torn API Key server " + serverVersion)
-	//TODO: I hate all this output being here - let's move it elsewhere (Log.Info stuff is fine)
-	fmt.Println("lamashtu's Torn API Key server " + serverVersion)
-	Log.Info().
-		Str("max keys/min", strconv.Itoa(keys.TotalPerMinute)).
-		Str("keys available", strconv.Itoa(len(keys.Apikeys))).
-		Msg("")
-	_, _ = fmt.Fprintf(os.Stdout, "%v keys available for use, up to %v queries per minute\n", len(keys.Apikeys), keys.TotalPerMinute)
-	for k := range keys.Apikeys {
-		_, _ = fmt.Fprintf(tabWriter, "%s\t%v\t%s\t%s%s\n", keys.Apikeys[k].User, keys.Apikeys[k].MaxPerMinute, " uses/min", " types: ", keys.Apikeys[k].Types)
-		Log.Info().
-			Str("keyUser", keys.Apikeys[k].User).
-			Str("keyMaxUsers", strconv.Itoa(keys.Apikeys[k].MaxPerMinute)).
-			Str("types", strings.Join(keys.Apikeys[k].Types, ",")).
-			Msg("")
-	}
-	err = tabWriter.Flush() // sends column-formatted output to stdio
-	if err != nil {
-		panic(err)
-	}
+	err = startMessages(tabWriter, err)
 
 	atexit.Register(exitHandler)
 
-	//flag.Parse()
+	// flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
 	if err != nil {
 		Log.Error().
