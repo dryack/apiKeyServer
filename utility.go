@@ -48,7 +48,6 @@ func exitHandler() {
 			Str("kills", strconv.FormatUint(key.Kills, 10)).
 			Str("uses", strconv.FormatUint(key.Uses, 10)).
 			Msg("")
-		//fmt.Print(key.Tornkey + ": " + strconv.FormatUint(key.Kills, 10) + "\n")
 	}
 	Log.Info().Str("exhaustions", strconv.Itoa(exhausted)).Msg("")
 	//fmt.Print("Number of exhaustions: " + strconv.Itoa(exhausted) + "\n")

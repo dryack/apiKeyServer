@@ -95,7 +95,6 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 		if contained && key.Active {
 			if key.CurrentlyRemaining == max {
 				keys.Apikeys[i].CurrentlyRemaining -= 1
-				//fmt.Print(" - " + strconv.Itoa(keys.Apikeys[i].CurrentlyRemaining))
 				Log.Debug().
 					Str("key", key.Tornkey).
 					Msg("returning key ")
@@ -128,7 +127,6 @@ func next(keys *Keys, keyType string) (string, string) {
 			Log.Info().Msg("Waiting for key to become available")
 			exhausted += 1
 			Log.Debug().Caller().Str("exhaustion-cycle", strconv.Itoa(exhausted)).Msg("Exhaustion")
-			//fmt.Print("Waiting for key to become available")
 		}
 		firstrun++
 		time.Sleep(1 * time.Second)

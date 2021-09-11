@@ -31,7 +31,6 @@ func (s *server) GetKey(ctx context.Context, requester *apikeyserver.Request) (*
 	Log.Debug().Caller().Msg("GetKey()")
 	reqStr := requester.Requester
 	reqType := requester.Type
-	//fmt.Print("\nReceived request from: " + reqStr)
 	Log.Info().Str("requester", reqStr).Str("type", reqType).Msg("Received request")
 	key, name := next(&keys, reqType)
 	return &apikeyserver.Key{Key: key, Name: name}, nil
@@ -41,7 +40,6 @@ func (s *server) KillKey(ctx context.Context, key *apikeyserver.KillRequest) (*a
 	Log.Debug().Caller().Msg("KillKey()")
 	keyToKill := key.Key
 	Log.Info().Str("key", keyToKill).Msg("Killing ")
-	//fmt.Print("Killing key " + keyToKill + "\n")
 	killKey(&keys, keyToKill)
 	return &apikeyserver.Result{Result: true}, nil
 }
