@@ -59,7 +59,7 @@ func initKeys(keys *Keys) {
 	}
 }
 
-// any keys have uses left right now?
+// any keys have uses remaining right now?
 func anyLeft(keys Keys, keyType string) bool {
 	defer timeTrack(time.Now(), "anyLeft()") // debug
 	Log.Debug().Caller().Str("keyType", keyType).Msg("anyLeft()")
