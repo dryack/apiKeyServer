@@ -100,7 +100,7 @@ func main() {
 	t = time.Now().UTC().UnixMilli() + 60000 // 1 minute
 	initKeys(&keys)
 
-	err = startMessages(tabWriter, err)
+	err = startMessages(tabWriter, err) // print server startup info to stdout
 
 	atexit.Register(exitHandler)
 

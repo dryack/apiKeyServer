@@ -33,8 +33,9 @@ import (
 // once.
 
 type Keys struct {
-	TotalPerMinute int
-	Apikeys        []struct {
+	TotalPerMinute  int
+	TotalKeysServed uint64
+	Apikeys         []struct {
 		User               string   `yaml:"user"`
 		MaxPerMinute       int      `yaml:"max_per_minute"`
 		Tornkey            string   `yaml:"tornkey"`
@@ -99,6 +100,7 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 					Str("key", key.Tornkey).
 					Msg("returning key ")
 				keys.Apikeys[i].Uses++
+				keys.TotalKeysServed++
 				return key.Tornkey, key.User
 			}
 		}
