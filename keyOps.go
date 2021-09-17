@@ -60,7 +60,9 @@ func initKeys(keys *Keys) {
 	}
 
 	for i := range keys.Apikeys {
-		keys.TotalPerMinute += keys.Apikeys[i].MaxPerMinute
+		if keys.Apikeys[i].Active {
+			keys.TotalPerMinute += keys.Apikeys[i].MaxPerMinute
+		}
 		keys.Apikeys[i].CurrentlyRemaining = keys.Apikeys[i].MaxPerMinute
 	}
 }
