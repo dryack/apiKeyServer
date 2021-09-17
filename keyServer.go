@@ -27,27 +27,27 @@ type server struct {
 	apikeyserver.UnimplementedApiKeyServerServer
 }
 
-func (s *server) GetKey(ctx context.Context, requester *apikeyserver.Request) (*apikeyserver.Key, error) {
+func (s *server) GetKey(ctx context.Context, requester *apikeyserver.RequestKey) (*apikeyserver.GetKeyResponse, error) {
 	Log.Debug().Caller().Msg("GetKey()")
 	reqStr := requester.Requester
 	reqType := requester.Type
 	Log.Info().Str("requester", reqStr).Str("type", reqType).Msg("Received request")
 	key, name := next(&keys, reqType)
-	return &apikeyserver.Key{Key: key, Name: name}, nil
+	return &apikeyserver.GetKeyResponse{Key: key, Name: name}, nil
 }
 
-func (s *server) KillKey(ctx context.Context, key *apikeyserver.KillRequest) (*apikeyserver.Result, error) {
+func (s *server) KillKey(ctx context.Context, key *apikeyserver.RequestKillKey) (*apikeyserver.GenericKillResponse, error) {
 	Log.Debug().Caller().Msg("KillKey()")
 	keyToKill := key.Key
 	Log.Info().Str("key", keyToKill).Msg("Killing ")
 	killKey(&keys, keyToKill)
-	return &apikeyserver.Result{Result: true}, nil
+	return &apikeyserver.GenericKillResponse{Result: true}, nil
 }
 
-func (s *server) PermKillKey(ctx context.Context, key *apikeyserver.PermKillRequest) (*apikeyserver.Result, error) {
+func (s *server) PermKillKey(ctx context.Context, key *apikeyserver.PermRequestKillKey) (*apikeyserver.GenericKillResponse, error) {
 	Log.Debug().Caller().Msg("PermKillKey()")
 	keyToKill := key.Key
 	Log.Info().Str("key", keyToKill).Msg("Permanently killing ")
 	permKillKey(&keys, keyToKill)
-	return &apikeyserver.Result{Result: true}, nil
+	return &apikeyserver.GenericKillResponse{Result: true}, nil
 }
