@@ -38,15 +38,16 @@ import (
 	"time"
 )
 
+const serverVersion = "v1.27"
+
 var (
 	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	certFile = flag.String("cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("key_file", "", "The TLS key file")
 	// port     = flag.Int("port", 50051, "The server port")
-	port          = flag.Int("port", 50052, "The server port") // for remote debugging purposes
-	keys          Keys
-	t             int64
-	serverVersion = "v1.27"
+	port = flag.Int("port", 50052, "The server port") // for remote debugging purposes
+	keys Keys
+	t    int64
 	// Log setting up the logger object for global access
 	Log     zerolog.Logger
 	Sampled zerolog.Logger

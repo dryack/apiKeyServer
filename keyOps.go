@@ -36,6 +36,7 @@ type Keys struct {
 	TotalExhaustions int
 	TotalPerMinute   int
 	TotalKeysServed  uint64
+	ServerVersion    string
 	StartupTime      int64 // Unix time
 	Apikeys          []struct {
 		User               string   `yaml:"user"`
@@ -58,6 +59,10 @@ func initKeys(keys *Keys) {
 
 	if keys.StartupTime == 0 {
 		keys.StartupTime = time.Now().Unix()
+	}
+
+	if keys.ServerVersion == "" {
+		keys.ServerVersion = serverVersion
 	}
 
 	for i := range keys.Apikeys {
