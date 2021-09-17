@@ -35,6 +35,7 @@ import (
 type Keys struct {
 	TotalPerMinute  int
 	TotalKeysServed uint64
+	StartupTime     int64 // Unix time
 	Apikeys         []struct {
 		User               string   `yaml:"user"`
 		MaxPerMinute       int      `yaml:"max_per_minute"`
@@ -53,6 +54,10 @@ func initKeys(keys *Keys) {
 
 	mutexKeys.Lock()
 	defer mutexKeys.Unlock()
+
+	if keys.StartupTime == 0 {
+		keys.StartupTime = time.Now().Unix()
+	}
 
 	for i := range keys.Apikeys {
 		keys.TotalPerMinute += keys.Apikeys[i].MaxPerMinute
