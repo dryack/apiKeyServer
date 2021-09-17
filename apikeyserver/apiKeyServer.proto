@@ -79,8 +79,8 @@ message PermRequestKillKey {
 message GetServerInfoResponse {
     string serverVersion = 1;
     int64 keyExhaustions = 2;
-    int32 totalAvailableUsesPerMin = 3;
-    sint64 totalKeysServed = 4;
+    int32 totalAvailableUsesPerMin = 3; // keys.TotalPerMinute
+    sint64 totalKeysServed = 4; // keys.TotalKeysServed
     sint32 totalKeysKilled = 5;
     string keyNamesPermaKilled = 6;
     repeated KeyDetailsResponse items = 7;

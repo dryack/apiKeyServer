@@ -45,7 +45,6 @@ var (
 	// port     = flag.Int("port", 50051, "The server port")
 	port          = flag.Int("port", 50052, "The server port") // for remote debugging purposes
 	keys          Keys
-	exhausted     = 0
 	t             int64
 	serverVersion = "v1.27"
 	// Log setting up the logger object for global access

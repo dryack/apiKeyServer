@@ -33,10 +33,11 @@ import (
 // once.
 
 type Keys struct {
-	TotalPerMinute  int
-	TotalKeysServed uint64
-	StartupTime     int64 // Unix time
-	Apikeys         []struct {
+	TotalExhaustions int
+	TotalPerMinute   int
+	TotalKeysServed  uint64
+	StartupTime      int64 // Unix time
+	Apikeys          []struct {
 		User               string   `yaml:"user"`
 		MaxPerMinute       int      `yaml:"max_per_minute"`
 		Tornkey            string   `yaml:"tornkey"`
@@ -134,8 +135,8 @@ func next(keys *Keys, keyType string) (string, string) {
 		// where keys are still exhausted will be silent during non-debug operation
 		if firstrun == 0 {
 			Log.Info().Msg("Waiting for key to become available")
-			exhausted += 1
-			Log.Debug().Caller().Str("exhaustion-cycle", strconv.Itoa(exhausted)).Msg("Exhaustion")
+			keys.TotalExhaustions++
+			Log.Debug().Caller().Str("exhaustion-cycle", strconv.Itoa(keys.TotalExhaustions)).Msg("Exhaustion")
 		}
 		firstrun++
 		time.Sleep(1 * time.Second)

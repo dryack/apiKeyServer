@@ -49,7 +49,7 @@ func exitHandler() {
 			Str("uses", strconv.FormatUint(key.Uses, 10)).
 			Msg("")
 	}
-	Log.Info().Str("exhaustions", strconv.Itoa(exhausted)).Msg("")
+	Log.Info().Str("exhaustions", strconv.Itoa(keys.TotalExhaustions)).Msg("")
 }
 
 func timeTrack(start time.Time, name string) {
