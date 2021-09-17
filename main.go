@@ -47,7 +47,7 @@ var (
 	keys          Keys
 	exhausted     = 0
 	t             int64
-	serverVersion = "v1.25"
+	serverVersion = "v1.27"
 	// Log setting up the logger object for global access
 	Log     zerolog.Logger
 	Sampled zerolog.Logger

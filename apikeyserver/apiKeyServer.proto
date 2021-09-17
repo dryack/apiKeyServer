@@ -27,11 +27,16 @@ service ApiKeyServer {
     rpc GetKey(RequestKey) returns (GetKeyResponse) {}
     rpc KillKey(RequestKillKey) returns (GenericKillResponse) {}
     rpc PermKillKey(PermRequestKillKey) returns (GenericKillResponse) {}
+    rpc GetServerInfo(RequestServerInfo) returns (GetServerInfoResponse) {}
 }
 
 message RequestKey {
     string requester = 1;
     string type = 2;
+}
+
+message RequestServerInfo {
+    string requester = 1;
 }
 
 message GetKeyResponse {
@@ -43,8 +48,12 @@ message GetKeyResponse {
 }
 
 message KeyResponseRemaining {
-    string typeName = 1;
+    repeated KeyResponseTypeNames name = 1;
     int32 typeRemaining = 2;
+}
+
+message KeyResponseTypeNames {
+    string typeName = 1;
 }
 
 
@@ -65,4 +74,25 @@ message PermRequestKillKey {
     string key = 2;
     string name = 3;
     int64 time = 4; // unixNano
+}
+
+message GetServerInfoResponse {
+    string serverVersion = 1;
+    int64 keyExhaustions = 2;
+    int32 totalAvailableUsesPerMin = 3;
+    sint64 totalKeysServed = 4;
+    sint32 totalKeysKilled = 5;
+    string keyNamesPermaKilled = 6;
+    repeated KeyDetailsResponse items = 7;
+    int64 time = 8;
+    int64 uptime = 9;
+    float avgKeysServedPerMin = 10;
+}
+
+message KeyDetailsResponse {
+    string name = 1;
+    string types = 2;
+    int64 uses = 3;
+    int32 kills = 4;
+    bool active = 5;
 }

@@ -21,6 +21,7 @@ type ApiKeyServerClient interface {
 	GetKey(ctx context.Context, in *RequestKey, opts ...grpc.CallOption) (*GetKeyResponse, error)
 	KillKey(ctx context.Context, in *RequestKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error)
 	PermKillKey(ctx context.Context, in *PermRequestKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error)
+	GetServerInfo(ctx context.Context, in *RequestServerInfo, opts ...grpc.CallOption) (*GetServerInfoResponse, error)
 }
 
 type apiKeyServerClient struct {
@@ -58,6 +59,15 @@ func (c *apiKeyServerClient) PermKillKey(ctx context.Context, in *PermRequestKil
 	return out, nil
 }
 
+func (c *apiKeyServerClient) GetServerInfo(ctx context.Context, in *RequestServerInfo, opts ...grpc.CallOption) (*GetServerInfoResponse, error) {
+	out := new(GetServerInfoResponse)
+	err := c.cc.Invoke(ctx, "/apikeyserver.ApiKeyServer/GetServerInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiKeyServerServer is the server API for ApiKeyServer service.
 // All implementations must embed UnimplementedApiKeyServerServer
 // for forward compatibility
@@ -65,6 +75,7 @@ type ApiKeyServerServer interface {
 	GetKey(context.Context, *RequestKey) (*GetKeyResponse, error)
 	KillKey(context.Context, *RequestKillKey) (*GenericKillResponse, error)
 	PermKillKey(context.Context, *PermRequestKillKey) (*GenericKillResponse, error)
+	GetServerInfo(context.Context, *RequestServerInfo) (*GetServerInfoResponse, error)
 	mustEmbedUnimplementedApiKeyServerServer()
 }
 
@@ -80,6 +91,9 @@ func (UnimplementedApiKeyServerServer) KillKey(context.Context, *RequestKillKey)
 }
 func (UnimplementedApiKeyServerServer) PermKillKey(context.Context, *PermRequestKillKey) (*GenericKillResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PermKillKey not implemented")
+}
+func (UnimplementedApiKeyServerServer) GetServerInfo(context.Context, *RequestServerInfo) (*GetServerInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServerInfo not implemented")
 }
 func (UnimplementedApiKeyServerServer) mustEmbedUnimplementedApiKeyServerServer() {}
 
@@ -148,6 +162,24 @@ func _ApiKeyServer_PermKillKey_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiKeyServer_GetServerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestServerInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiKeyServerServer).GetServerInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/apikeyserver.ApiKeyServer/GetServerInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiKeyServerServer).GetServerInfo(ctx, req.(*RequestServerInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiKeyServer_ServiceDesc is the grpc.ServiceDesc for ApiKeyServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -166,6 +198,10 @@ var ApiKeyServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PermKillKey",
 			Handler:    _ApiKeyServer_PermKillKey_Handler,
+		},
+		{
+			MethodName: "GetServerInfo",
+			Handler:    _ApiKeyServer_GetServerInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
