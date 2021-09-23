@@ -33,6 +33,7 @@ service ApiKeyServer {
 message RequestKey {
     string requester = 1;
     string type = 2;
+    bool   acceptExhaustion = 3; // requester doesn't want to wait, and instead wishes be told there are no keys available
 }
 
 message RequestServerInfo {
@@ -45,10 +46,11 @@ message GetKeyResponse {
     string type = 3;
     int64 time = 4; // unixNano
     repeated KeyResponseRemaining items = 5;
+    bool exhausted = 6;  // no keys remaining
 }
 
 message KeyResponseRemaining {
-    repeated KeyResponseTypeNames name = 1;
+    string KeyResponseTypeNames = 1;
     int32 typeRemaining = 2;
 }
 
@@ -77,16 +79,16 @@ message PermRequestKillKey {
 }
 
 message GetServerInfoResponse {
-    string serverVersion = 1;
-    int64 keyExhaustions = 2;
+    string serverVersion = 1; // keys.ServerVersion
+    int64 keyExhaustions = 2; // keys.TotalExhaustions
     int32 totalAvailableUsesPerMin = 3; // keys.TotalPerMinute
     sint64 totalKeysServed = 4; // keys.TotalKeysServed
-    sint32 totalKeysKilled = 5;
+    sint32 totalKeysKilled = 5; // computed
     string keyNamesPermaKilled = 6;
     repeated KeyDetailsResponse items = 7;
     int64 time = 8;
-    int64 uptime = 9;
-    float avgKeysServedPerMin = 10;
+    int64 uptime = 9; // computed
+    float avgKeysServedPerMin = 10; // computed
 }
 
 message KeyDetailsResponse {

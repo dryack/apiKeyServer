@@ -122,8 +122,16 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 	return "nil", "nil"
 }
 
+type getKeyResponse struct {
+	key       string
+	name      string
+	keyType   string
+	time      int64
+	exhausted bool
+}
+
 // return a key for use by requester
-func next(keys *Keys, keyType string) (string, string) {
+func next(keys *Keys, keyType string, acceptExhaustion bool) *getKeyResponse {
 	Log.Debug().Caller().Str("keyType", keyType).Msg("next()")
 	firstrun := 0
 
@@ -134,7 +142,19 @@ func next(keys *Keys, keyType string) (string, string) {
 			// stolen from: https://stackoverflow.com/questions/16331063/how-can-i-get-the-string-representation-of-a-struct
 			keysForSample := fmt.Sprintf("%v", keys.Apikeys)
 			Sampled.Debug().Msg(keysForSample)
-			return key, name
+
+			return &getKeyResponse{
+				name:      name,
+				key:       key,
+				keyType:   keyType, // returning the *requested* keytype - not the available keytypes for a given record
+				time:      time.Now().UnixNano(),
+				exhausted: false,
+			}
+		} else if acceptExhaustion {
+			return &getKeyResponse{
+				time:      time.Now().UnixNano(),
+				exhausted: true,
+			}
 		}
 		// we're out of keys.  if this is our first time at exhaustion this minute, print a message.  subsequent loops
 		// where keys are still exhausted will be silent during non-debug operation

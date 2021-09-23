@@ -21,6 +21,7 @@ package main
 import (
 	"apiKeyServer/apikeyserver"
 	"context"
+	"strings"
 )
 
 type server struct {
@@ -31,9 +32,30 @@ func (s *server) GetKey(ctx context.Context, requester *apikeyserver.RequestKey)
 	Log.Debug().Caller().Msg("GetKey()")
 	reqStr := requester.Requester
 	reqType := requester.Type
+	acceptExhaustion := requester.AcceptExhaustion
 	Log.Info().Str("requester", reqStr).Str("type", reqType).Msg("Received request")
-	key, name := next(&keys, reqType)
-	return &apikeyserver.GetKeyResponse{Key: key, Name: name}, nil
+	responseStruct := next(&keys, reqType, acceptExhaustion)
+	var keysLeft []*apikeyserver.KeyResponseRemaining
+
+	mutexKeys.RLock()
+	for _, v := range keys.Apikeys {
+		types := strings.Join(v.Types, ", ")
+		key := &apikeyserver.KeyResponseRemaining{
+			KeyResponseTypeNames: types,
+			TypeRemaining:        int32(v.CurrentlyRemaining),
+		}
+		keysLeft = append(keysLeft, key)
+	}
+	mutexKeys.Unlock()
+
+	return &apikeyserver.GetKeyResponse{
+		Key:       responseStruct.key,
+		Name:      responseStruct.name,
+		Type:      responseStruct.keyType,
+		Time:      responseStruct.time,
+		Exhausted: responseStruct.exhausted,
+		Items:     keysLeft,
+	}, nil
 }
 
 func (s *server) KillKey(ctx context.Context, key *apikeyserver.RequestKillKey) (*apikeyserver.GenericKillResponse, error) {
@@ -50,4 +72,21 @@ func (s *server) PermKillKey(ctx context.Context, key *apikeyserver.PermRequestK
 	Log.Info().Str("key", keyToKill).Msg("Permanently killing ")
 	permKillKey(&keys, keyToKill)
 	return &apikeyserver.GenericKillResponse{Result: true}, nil
+}
+
+func (s *server) GetServerInfo(ctx context.Context, request *apikeyserver.RequestServerInfo) (*apikeyserver.GetServerInfoResponse, error) {
+	Log.Debug().Caller().Msg("GetServerInfo()")
+
+	return &apikeyserver.GetServerInfoResponse{
+		ServerVersion:            "",
+		KeyExhaustions:           0,
+		TotalAvailableUsesPerMin: 0,
+		TotalKeysServed:          0,
+		TotalKeysKilled:          0,
+		KeyNamesPermaKilled:      "",
+		Items:                    nil,
+		Time:                     0,
+		Uptime:                   0,
+		AvgKeysServedPerMin:      0,
+	}, nil
 }
