@@ -38,7 +38,7 @@ import (
 	"time"
 )
 
-const serverVersion = "v1.27"
+const serverVersion = "v1.28"
 
 var (
 	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
@@ -57,6 +57,18 @@ var (
 	// lock keys when needed
 	mutexKeys = sync.RWMutex{}
 )
+
+// TODO: Integrate Viper for config management, including live reload (?)
+// https://github.com/spf13/viper
+
+// TODO: Consider the implications of:
+// As others have said, init is not commonly used for this. One thing it can be useful for is initializing global
+// variables that require more than one expression. However, you can also accomplish this with a function call:
+//
+// var foo = func() int {
+//    /* complex logic here... */
+//    return x
+// }()
 
 // TODO: Options for logging; turn it off, change logfile location, etc.
 func init() {
