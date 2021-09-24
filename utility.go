@@ -45,11 +45,11 @@ func exitHandler() {
 	for _, key := range keys.Apikeys {
 		Log.Info().
 			Str("key", key.Tornkey).
-			Str("kills", strconv.FormatUint(key.Kills, 10)).
-			Str("uses", strconv.FormatUint(key.Uses, 10)).
+			Str("kills", strconv.FormatUint(uint64(key.Kills), 10)).
+			Str("uses", strconv.FormatUint(uint64(key.Uses), 10)).
 			Msg("")
 	}
-	Log.Info().Str("exhaustions", strconv.Itoa(keys.TotalExhaustions)).Msg("")
+	Log.Info().Str("exhaustions", strconv.Itoa(int(keys.TotalExhaustions))).Msg("")
 }
 
 func timeTrack(start time.Time, name string) {
@@ -61,7 +61,7 @@ func startMessages(tabWriter *tabwriter.Writer, err error) error {
 	Log.Info().Msg("Torn API Key server " + serverVersion)
 	fmt.Println("lamashtu's Torn API Key server " + serverVersion)
 	Log.Info().
-		Str("max keys/min", strconv.Itoa(keys.TotalPerMinute)).
+		Str("max keys/min", strconv.Itoa(int(keys.TotalPerMinute))).
 		Str("keys available", strconv.Itoa(len(keys.Apikeys))).
 		Msg("")
 	_, _ = fmt.Fprintf(os.Stdout, "%v keys available for use, up to %v queries per minute\n", len(keys.Apikeys), keys.TotalPerMinute)
@@ -69,7 +69,7 @@ func startMessages(tabWriter *tabwriter.Writer, err error) error {
 		_, _ = fmt.Fprintf(tabWriter, "%s\t%v\t%s\t%s%s\n", keys.Apikeys[k].User, keys.Apikeys[k].MaxPerMinute, " uses/min", " types: ", keys.Apikeys[k].Types)
 		Log.Info().
 			Str("keyUser", keys.Apikeys[k].User).
-			Str("keyMaxUsers", strconv.Itoa(keys.Apikeys[k].MaxPerMinute)).
+			Str("keyMaxUsers", strconv.Itoa(int(keys.Apikeys[k].MaxPerMinute))).
 			Str("types", strings.Join(keys.Apikeys[k].Types, ",")).
 			Msg("")
 	}

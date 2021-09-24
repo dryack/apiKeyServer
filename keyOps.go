@@ -19,8 +19,10 @@
 package main
 
 import (
+	"apiKeyServer/apikeyserver"
 	"fmt"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -33,20 +35,20 @@ import (
 // once.
 
 type Keys struct {
-	TotalExhaustions int
-	TotalPerMinute   int
+	TotalExhaustions uint32
+	TotalPerMinute   uint32
 	TotalKeysServed  uint64
 	ServerVersion    string
 	StartupTime      int64 // Unix time
 	Apikeys          []struct {
 		User               string   `yaml:"user"`
-		MaxPerMinute       int      `yaml:"max_per_minute"`
+		MaxPerMinute       uint32   `yaml:"max_per_minute"`
 		Tornkey            string   `yaml:"tornkey"`
-		CurrentlyRemaining int      `yaml:"currently_remaining"`
+		CurrentlyRemaining int32    `yaml:"currently_remaining"`
 		Types              []string `yaml:"types"`
 		Active             bool     `yaml:"active"`
-		Kills              uint64
-		Uses               uint64
+		Kills              uint32
+		Uses               uint32
 	} `yaml:"apikeys"`
 }
 
@@ -69,7 +71,7 @@ func initKeys(keys *Keys) {
 		if keys.Apikeys[i].Active {
 			keys.TotalPerMinute += keys.Apikeys[i].MaxPerMinute
 		}
-		keys.Apikeys[i].CurrentlyRemaining = keys.Apikeys[i].MaxPerMinute
+		keys.Apikeys[i].CurrentlyRemaining = int32(keys.Apikeys[i].MaxPerMinute)
 	}
 }
 
@@ -95,7 +97,7 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 	defer timeTrack(time.Now(), "levelKeyUses()") // debug
 	Log.Debug().Caller().Str("keyType", keyType).Msg("levelKeyUses()")
 
-	max := -1
+	var max int32 = -1
 	var contained = false
 	for _, key := range keys.Apikeys {
 		if contains(key.Types, keyType) && key.Active {
@@ -122,6 +124,7 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 	return "nil", "nil"
 }
 
+// TODO: eliminate this struct, see comment at next() below
 type getKeyResponse struct {
 	key       string
 	name      string
@@ -130,6 +133,7 @@ type getKeyResponse struct {
 	exhausted bool
 }
 
+// TODO: refactor to accept pointer to GetKeyResponse and replace type struct getKeyResponse usage
 // return a key for use by requester
 func next(keys *Keys, keyType string, acceptExhaustion bool) *getKeyResponse {
 	Log.Debug().Caller().Str("keyType", keyType).Msg("next()")
@@ -161,7 +165,7 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *getKeyResponse {
 		if firstrun == 0 {
 			Log.Info().Msg("Waiting for key to become available")
 			keys.TotalExhaustions++
-			Log.Debug().Caller().Str("exhaustion-cycle", strconv.Itoa(keys.TotalExhaustions)).Msg("Exhaustion")
+			Log.Debug().Caller().Str("exhaustion-cycle", strconv.Itoa(int(keys.TotalExhaustions))).Msg("Exhaustion")
 		}
 		firstrun++
 		time.Sleep(1 * time.Second)
@@ -192,5 +196,44 @@ func permKillKey(keys *Keys, keyToKill string) {
 			keys.Apikeys[i].Kills += 1
 			keys.Apikeys[i].Active = false
 		}
+	}
+}
+
+func collectServerInfo(keys *Keys, res *apikeyserver.GetServerInfoResponse) *apikeyserver.GetServerInfoResponse {
+	uptime := time.Since(time.UnixMilli(keys.StartupTime))
+	t, _ := time.ParseDuration(strconv.FormatInt(int64(uptime), 10))
+
+	var totKilled uint32
+	var permKilled []string
+	var keyDetails []*apikeyserver.KeyDetailsResponse
+	mutexKeys.RLock()
+	for _, v := range keys.Apikeys {
+		types := strings.Join(v.Types, ", ")
+		totKilled += v.Kills
+		if !v.Active {
+			permKilled = append(permKilled, v.User)
+		}
+		key := &apikeyserver.KeyDetailsResponse{
+			Name:   v.User,
+			Types:  types,
+			Uses:   v.Uses,
+			Kills:  v.Kills,
+			Active: v.Active,
+		}
+		keyDetails = append(keyDetails, key)
+	}
+	mutexKeys.Unlock()
+
+	return &apikeyserver.GetServerInfoResponse{
+		ServerVersion:            serverVersion,
+		KeyExhaustions:           keys.TotalExhaustions,
+		TotalAvailableUsesPerMin: uint64(keys.TotalPerMinute),
+		TotalKeysServed:          keys.TotalKeysServed,
+		TotalKeysKilled:          uint64(totKilled),
+		KeyNamesPermaKilled:      strings.Join(permKilled, ", "),
+		Items:                    keyDetails,
+		Time:                     time.Now().UnixNano(),
+		Uptime:                   int64(uptime),
+		AvgKeysServedPerMin:      float32(float64(keys.TotalKeysServed) / t.Minutes()),
 	}
 }

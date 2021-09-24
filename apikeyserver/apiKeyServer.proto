@@ -51,7 +51,7 @@ message GetKeyResponse {
 
 message KeyResponseRemaining {
     string KeyResponseTypeNames = 1;
-    int32 typeRemaining = 2;
+    uint32 typeRemaining = 2;
 }
 
 message KeyResponseTypeNames {
@@ -80,10 +80,10 @@ message PermRequestKillKey {
 
 message GetServerInfoResponse {
     string serverVersion = 1; // keys.ServerVersion
-    int64 keyExhaustions = 2; // keys.TotalExhaustions
-    int32 totalAvailableUsesPerMin = 3; // keys.TotalPerMinute
-    sint64 totalKeysServed = 4; // keys.TotalKeysServed
-    sint32 totalKeysKilled = 5; // computed
+    uint32 keyExhaustions = 2; // keys.TotalExhaustions
+    uint64 totalAvailableUsesPerMin = 3; // keys.TotalPerMinute
+    uint64 totalKeysServed = 4; // keys.TotalKeysServed
+    uint64 totalKeysKilled = 5; // computed
     string keyNamesPermaKilled = 6;
     repeated KeyDetailsResponse items = 7;
     int64 time = 8;
@@ -94,7 +94,7 @@ message GetServerInfoResponse {
 message KeyDetailsResponse {
     string name = 1;
     string types = 2;
-    int64 uses = 3;
-    int32 kills = 4;
+    uint32 uses = 3;
+    uint32 kills = 4;
     bool active = 5;
 }

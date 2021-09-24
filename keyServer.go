@@ -28,6 +28,7 @@ type server struct {
 	apikeyserver.UnimplementedApiKeyServerServer
 }
 
+// TODO: pass pointer to GetKeyResponse to next()
 func (s *server) GetKey(ctx context.Context, requester *apikeyserver.RequestKey) (*apikeyserver.GetKeyResponse, error) {
 	Log.Debug().Caller().Msg("GetKey()")
 	reqStr := requester.Requester
@@ -35,6 +36,8 @@ func (s *server) GetKey(ctx context.Context, requester *apikeyserver.RequestKey)
 	acceptExhaustion := requester.AcceptExhaustion
 	Log.Info().Str("requester", reqStr).Str("type", reqType).Msg("Received request")
 	responseStruct := next(&keys, reqType, acceptExhaustion)
+
+	// TODO: extract to method that can work with KeyResponseRemaining and KeyDetailsRespons
 	var keysLeft []*apikeyserver.KeyResponseRemaining
 
 	mutexKeys.RLock()
@@ -42,11 +45,12 @@ func (s *server) GetKey(ctx context.Context, requester *apikeyserver.RequestKey)
 		types := strings.Join(v.Types, ", ")
 		key := &apikeyserver.KeyResponseRemaining{
 			KeyResponseTypeNames: types,
-			TypeRemaining:        int32(v.CurrentlyRemaining),
+			TypeRemaining:        uint32(v.CurrentlyRemaining),
 		}
 		keysLeft = append(keysLeft, key)
 	}
 	mutexKeys.Unlock()
+	// end extract method
 
 	return &apikeyserver.GetKeyResponse{
 		Key:       responseStruct.key,
@@ -77,16 +81,7 @@ func (s *server) PermKillKey(ctx context.Context, key *apikeyserver.PermRequestK
 func (s *server) GetServerInfo(ctx context.Context, request *apikeyserver.RequestServerInfo) (*apikeyserver.GetServerInfoResponse, error) {
 	Log.Debug().Caller().Msg("GetServerInfo()")
 
-	return &apikeyserver.GetServerInfoResponse{
-		ServerVersion:            "",
-		KeyExhaustions:           0,
-		TotalAvailableUsesPerMin: 0,
-		TotalKeysServed:          0,
-		TotalKeysKilled:          0,
-		KeyNamesPermaKilled:      "",
-		Items:                    nil,
-		Time:                     0,
-		Uptime:                   0,
-		AvgKeysServedPerMin:      0,
-	}, nil
+	res := apikeyserver.GetServerInfoResponse{}
+
+	return collectServerInfo(&keys, &res), nil
 }
