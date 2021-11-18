@@ -224,16 +224,14 @@ func collectServerInfo(keys *Keys, res *apikeyserver.GetServerInfoResponse) *api
 	}
 	mutexKeys.Unlock()
 
-	return &apikeyserver.GetServerInfoResponse{
-		ServerVersion:            serverVersion,
-		KeyExhaustions:           keys.TotalExhaustions,
-		TotalAvailableUsesPerMin: uint64(keys.TotalPerMinute),
-		TotalKeysServed:          keys.TotalKeysServed,
-		TotalKeysKilled:          uint64(totKilled),
-		KeyNamesPermaKilled:      strings.Join(permKilled, ", "),
-		Items:                    keyDetails,
-		Time:                     time.Now().UnixNano(),
-		Uptime:                   int64(uptime),
-		AvgKeysServedPerMin:      float32(float64(keys.TotalKeysServed) / t.Minutes()),
-	}
+	res.ServerVersion = serverVersion
+	res.KeyExhaustions = keys.TotalExhaustions
+	res.TotalAvailableUsesPerMin = uint64(keys.TotalPerMinute)
+	res.KeyNamesPermaKilled = strings.Join(permKilled, ", ")
+	res.Items = keyDetails
+	res.Time = time.Now().UnixNano()
+	res.Uptime = int64(uptime)
+	res.AvgKeysServedPerMin = float32(float64(keys.TotalKeysServed) / t.Minutes())
+
+	return res
 }
