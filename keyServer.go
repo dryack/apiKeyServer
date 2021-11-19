@@ -40,7 +40,7 @@ func (s *server) GetKey(ctx context.Context, requester *apikeyserver.RequestKey)
 	// TODO: extract to method that can work with KeyResponseRemaining and KeyDetailsRespons
 	var keysLeft []*apikeyserver.KeyResponseRemaining
 
-	mutexKeys.RLock()
+	mutexKeys.Lock()
 	for _, v := range keys.Apikeys {
 		types := strings.Join(v.Types, ", ")
 		key := &apikeyserver.KeyResponseRemaining{
@@ -80,6 +80,7 @@ func (s *server) PermKillKey(ctx context.Context, key *apikeyserver.PermRequestK
 
 func (s *server) GetServerInfo(ctx context.Context, request *apikeyserver.RequestServerInfo) (*apikeyserver.GetServerInfoResponse, error) {
 	Log.Debug().Caller().Msg("GetServerInfo()")
+	Log.Info().Str("requester", request.Requester)
 
 	res := apikeyserver.GetServerInfoResponse{}
 

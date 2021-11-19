@@ -39,7 +39,7 @@ type Keys struct {
 	TotalPerMinute   uint32
 	TotalKeysServed  uint64
 	ServerVersion    string
-	StartupTime      int64 // Unix time
+	StartupTime      time.Time
 	Apikeys          []struct {
 		User               string   `yaml:"user"`
 		MaxPerMinute       uint32   `yaml:"max_per_minute"`
@@ -59,14 +59,15 @@ func initKeys(keys *Keys) {
 	mutexKeys.Lock()
 	defer mutexKeys.Unlock()
 
-	if keys.StartupTime == 0 {
-		keys.StartupTime = time.Now().Unix()
+	if keys.StartupTime.UnixNano() == 0 {
+		keys.StartupTime = time.Now()
 	}
 
 	if keys.ServerVersion == "" {
 		keys.ServerVersion = serverVersion
 	}
 
+	keys.TotalPerMinute = 0
 	for i := range keys.Apikeys {
 		if keys.Apikeys[i].Active {
 			keys.TotalPerMinute += keys.Apikeys[i].MaxPerMinute
@@ -200,13 +201,12 @@ func permKillKey(keys *Keys, keyToKill string) {
 }
 
 func collectServerInfo(keys *Keys, res *apikeyserver.GetServerInfoResponse) *apikeyserver.GetServerInfoResponse {
-	uptime := time.Since(time.UnixMilli(keys.StartupTime))
-	t, _ := time.ParseDuration(strconv.FormatInt(int64(uptime), 10))
+	uptime := time.Since(keys.StartupTime)
 
 	var totKilled uint32
 	var permKilled []string
 	var keyDetails []*apikeyserver.KeyDetailsResponse
-	mutexKeys.RLock()
+	mutexKeys.Lock()
 	for _, v := range keys.Apikeys {
 		types := strings.Join(v.Types, ", ")
 		totKilled += v.Kills
@@ -226,12 +226,13 @@ func collectServerInfo(keys *Keys, res *apikeyserver.GetServerInfoResponse) *api
 
 	res.ServerVersion = serverVersion
 	res.KeyExhaustions = keys.TotalExhaustions
+	res.TotalKeysServed = keys.TotalKeysServed
 	res.TotalAvailableUsesPerMin = uint64(keys.TotalPerMinute)
 	res.KeyNamesPermaKilled = strings.Join(permKilled, ", ")
 	res.Items = keyDetails
 	res.Time = time.Now().UnixNano()
 	res.Uptime = int64(uptime)
-	res.AvgKeysServedPerMin = float32(float64(keys.TotalKeysServed) / t.Minutes())
+	res.AvgKeysServedPerMin = float32((float64(keys.TotalKeysServed)) / uptime.Minutes())
 
 	return res
 }
