@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type ApiKeyServerClient interface {
 	GetKey(ctx context.Context, in *RequestKey, opts ...grpc.CallOption) (*GetKeyResponse, error)
 	KillKey(ctx context.Context, in *RequestKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error)
-	PermKillKey(ctx context.Context, in *PermRequestKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error)
+	PermKillKey(ctx context.Context, in *RequestPermKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error)
 	GetServerInfo(ctx context.Context, in *RequestServerInfo, opts ...grpc.CallOption) (*GetServerInfoResponse, error)
 }
 
@@ -50,7 +50,7 @@ func (c *apiKeyServerClient) KillKey(ctx context.Context, in *RequestKillKey, op
 	return out, nil
 }
 
-func (c *apiKeyServerClient) PermKillKey(ctx context.Context, in *PermRequestKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error) {
+func (c *apiKeyServerClient) PermKillKey(ctx context.Context, in *RequestPermKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error) {
 	out := new(GenericKillResponse)
 	err := c.cc.Invoke(ctx, "/apikeyserver.ApiKeyServer/PermKillKey", in, out, opts...)
 	if err != nil {
@@ -74,7 +74,7 @@ func (c *apiKeyServerClient) GetServerInfo(ctx context.Context, in *RequestServe
 type ApiKeyServerServer interface {
 	GetKey(context.Context, *RequestKey) (*GetKeyResponse, error)
 	KillKey(context.Context, *RequestKillKey) (*GenericKillResponse, error)
-	PermKillKey(context.Context, *PermRequestKillKey) (*GenericKillResponse, error)
+	PermKillKey(context.Context, *RequestPermKillKey) (*GenericKillResponse, error)
 	GetServerInfo(context.Context, *RequestServerInfo) (*GetServerInfoResponse, error)
 	mustEmbedUnimplementedApiKeyServerServer()
 }
@@ -89,7 +89,7 @@ func (UnimplementedApiKeyServerServer) GetKey(context.Context, *RequestKey) (*Ge
 func (UnimplementedApiKeyServerServer) KillKey(context.Context, *RequestKillKey) (*GenericKillResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method KillKey not implemented")
 }
-func (UnimplementedApiKeyServerServer) PermKillKey(context.Context, *PermRequestKillKey) (*GenericKillResponse, error) {
+func (UnimplementedApiKeyServerServer) PermKillKey(context.Context, *RequestPermKillKey) (*GenericKillResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PermKillKey not implemented")
 }
 func (UnimplementedApiKeyServerServer) GetServerInfo(context.Context, *RequestServerInfo) (*GetServerInfoResponse, error) {
@@ -145,7 +145,7 @@ func _ApiKeyServer_KillKey_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _ApiKeyServer_PermKillKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PermRequestKillKey)
+	in := new(RequestPermKillKey)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -157,7 +157,7 @@ func _ApiKeyServer_PermKillKey_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: "/apikeyserver.ApiKeyServer/PermKillKey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiKeyServerServer).PermKillKey(ctx, req.(*PermRequestKillKey))
+		return srv.(ApiKeyServerServer).PermKillKey(ctx, req.(*RequestPermKillKey))
 	}
 	return interceptor(ctx, in, info, handler)
 }
