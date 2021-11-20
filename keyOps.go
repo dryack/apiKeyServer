@@ -21,6 +21,7 @@ package main
 import (
 	"apiKeyServer/apikeyserver"
 	"fmt"
+	"github.com/mennanov/fmutils"
 	"strconv"
 	"strings"
 	"time"
@@ -200,7 +201,7 @@ func permKillKey(keys *Keys, keyToKill string) {
 	}
 }
 
-func collectServerInfo(keys *Keys, res *apikeyserver.GetServerInfoResponse) *apikeyserver.GetServerInfoResponse {
+func collectServerInfo(keys *Keys, req *apikeyserver.RequestServerInfo, res *apikeyserver.GetServerInfoResponse) *apikeyserver.GetServerInfoResponse {
 	uptime := time.Since(keys.StartupTime)
 
 	var totKilled uint32
@@ -234,5 +235,6 @@ func collectServerInfo(keys *Keys, res *apikeyserver.GetServerInfoResponse) *api
 	res.Uptime = int64(uptime)
 	res.AvgKeysServedPerMin = float32((float64(keys.TotalKeysServed)) / uptime.Minutes())
 
+	fmutils.Filter(res, req.FieldMask.GetPaths())
 	return res
 }

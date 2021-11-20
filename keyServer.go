@@ -80,9 +80,9 @@ func (s *server) PermKillKey(ctx context.Context, key *apikeyserver.PermRequestK
 
 func (s *server) GetServerInfo(ctx context.Context, request *apikeyserver.RequestServerInfo) (*apikeyserver.GetServerInfoResponse, error) {
 	Log.Debug().Caller().Msg("GetServerInfo()")
-	Log.Info().Str("requester", request.Requester)
+	Log.Info().Str("requester", request.Requester).Str("fieldmask", request.FieldMask.String()).Msg("Server Info")
 
 	res := apikeyserver.GetServerInfoResponse{}
 
-	return collectServerInfo(&keys, &res), nil
+	return collectServerInfo(&keys, request, &res), nil
 }

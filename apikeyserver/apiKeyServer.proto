@@ -16,6 +16,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/field_mask.proto";
+
 option java_multiple_files = true;
 option java_package = "main";
 option java_outer_classname = "apiKeyServer";
@@ -38,6 +40,7 @@ message RequestKey {
 
 message RequestServerInfo {
     string requester = 1;
+    google.protobuf.FieldMask field_mask = 2;
 }
 
 message GetKeyResponse {
