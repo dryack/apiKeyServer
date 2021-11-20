@@ -205,5 +205,5 @@ var ApiKeyServer_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "apikeyserver/apiKeyServer.proto",
+	Metadata: "apiKeyServer.proto",
 }
