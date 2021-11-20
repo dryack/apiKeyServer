@@ -28,21 +28,25 @@ package apikeyserver;
 service ApiKeyServer {
     rpc GetKey(RequestKey) returns (GetKeyResponse) {}
     rpc KillKey(RequestKillKey) returns (GenericKillResponse) {}
-    rpc PermKillKey(PermRequestKillKey) returns (GenericKillResponse) {}
+    rpc PermKillKey(RequestPermKillKey) returns (GenericKillResponse) {}
     rpc GetServerInfo(RequestServerInfo) returns (GetServerInfoResponse) {}
 }
 
+// request a new key from the server
 message RequestKey {
     string requester = 1;
     string type = 2;
-    bool   acceptExhaustion = 3; // requester doesn't want to wait, and instead wishes be told there are no keys available
+    bool   acceptExhaustion = 3;// requester doesn't want to wait, and instead wishes be told there are no keys available
+    google.protobuf.FieldMask field_mask = 4;
 }
 
+// request information about the server
 message RequestServerInfo {
     string requester = 1;
     google.protobuf.FieldMask field_mask = 2;
 }
 
+// responding to RequestKey
 message GetKeyResponse {
     string key = 1;
     string name = 2;
@@ -52,21 +56,18 @@ message GetKeyResponse {
     bool exhausted = 6;  // no keys remaining
 }
 
+// sub-response for RequestKey
 message KeyResponseRemaining {
     string KeyResponseTypeNames = 1;
     uint32 typeRemaining = 2;
 }
 
+// type for KeyResponseRemaining
 message KeyResponseTypeNames {
     string typeName = 1;
 }
 
-
-message GenericKillResponse {
-    bool result = 1;
-    int64 time = 2; // unixNano
-}
-
+// Request a key be unusable until the keys are re-initialized
 message RequestKillKey {
     string requester = 1;
     string key = 2;
@@ -74,13 +75,22 @@ message RequestKillKey {
     int64 time = 4; // unixNano
 }
 
-message PermRequestKillKey {
+// Request a key be permanently killed until the service is restarted
+message RequestPermKillKey {
     string requester = 1;
     string key = 2;
     string name = 3;
     int64 time = 4; // unixNano
 }
 
+// response for RequestKillKey and RequestPermKillKey
+message GenericKillResponse {
+    bool result = 1;
+    int64 time = 2; // unixNano
+
+}
+
+// response for RequestServerInfo
 message GetServerInfoResponse {
     string serverVersion = 1; // keys.ServerVersion
     uint32 keyExhaustions = 2; // keys.TotalExhaustions
@@ -94,6 +104,7 @@ message GetServerInfoResponse {
     float avgKeysServedPerMin = 10; // computed
 }
 
+// sub-response on the details of each key for GetServerInfoResponse
 message KeyDetailsResponse {
     string name = 1;
     string types = 2;
