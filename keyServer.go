@@ -21,7 +21,8 @@ package main
 import (
 	"apiKeyServer/apikeyserver"
 	"context"
-	"strings"
+	"fmt"
+	"github.com/mennanov/fmutils"
 )
 
 type server struct {
@@ -29,51 +30,53 @@ type server struct {
 }
 
 // TODO: pass pointer to GetKeyResponse to next()
-func (s *server) GetKey(ctx context.Context, requester *apikeyserver.RequestKey) (*apikeyserver.GetKeyResponse, error) {
+func (s *server) GetKey(ctx context.Context, request *apikeyserver.RequestKey) (*apikeyserver.GetKeyResponse, error) {
 	Log.Debug().Caller().Msg("GetKey()")
-	reqStr := requester.Requester
-	reqType := requester.Type
-	acceptExhaustion := requester.AcceptExhaustion
-	Log.Info().Str("requester", reqStr).Str("type", reqType).Msg("Received request")
-	responseStruct := next(&keys, reqType, acceptExhaustion)
+	reqStr := request.Requester
+	reqType := request.Type
+	acceptExhaustion := request.AcceptExhaustion
+	Log.Info().Str("request", reqStr).Str("type", reqType).Msg("Received request")
+	res := next(&keys, reqType, acceptExhaustion)
 
 	// TODO: extract to method that can work with KeyResponseRemaining and KeyDetailsRespons
-	var keysLeft []*apikeyserver.KeyResponseRemaining
+	//var keysLeft []*apikeyserver.KeyResponseRemaining
 
-	mutexKeys.Lock()
-	for _, v := range keys.Apikeys {
-		types := strings.Join(v.Types, ", ")
-		key := &apikeyserver.KeyResponseRemaining{
-			KeyResponseTypeNames: types,
-			TypeRemaining:        uint32(v.CurrentlyRemaining),
-		}
-		keysLeft = append(keysLeft, key)
-	}
-	mutexKeys.Unlock()
-	// end extract method
-
-	return &apikeyserver.GetKeyResponse{
-		Key:       responseStruct.key,
-		Name:      responseStruct.name,
-		Type:      responseStruct.keyType,
-		Time:      responseStruct.time,
-		Exhausted: responseStruct.exhausted,
-		Items:     keysLeft,
-	}, nil
+	//mutexKeys.Lock()
+	//for _, v := range keys.Apikeys {
+	//	types := strings.Join(v.Types, ", ")
+	//	key := &apikeyserver.KeyResponseRemaining{
+	//		KeyResponseTypeNames: types,
+	//		TypeRemaining:        uint32(v.CurrentlyRemaining),
+	//	}
+	//	keysLeft = append(keysLeft, key)
+	//}
+	//mutexKeys.Unlock()
+	//// end extract method
+	//res := &apikeyserver.GetKeyResponse{
+	//	Key:       responseStruct.key,
+	//	Name:      responseStruct.name,
+	//	Type:      responseStruct.keyType,
+	//	Time:      responseStruct.time,
+	//	Exhausted: responseStruct.exhausted,
+	//	Items:     keysLeft,
+	//}
+	fmt.Println(res.Items)
+	fmutils.Filter(res, request.FieldMask.GetPaths())
+	return res, nil
 }
 
-func (s *server) KillKey(ctx context.Context, key *apikeyserver.RequestKillKey) (*apikeyserver.GenericKillResponse, error) {
+func (s *server) KillKey(ctx context.Context, request *apikeyserver.RequestKillKey) (*apikeyserver.GenericKillResponse, error) {
 	Log.Debug().Caller().Msg("KillKey()")
-	keyToKill := key.Key
-	Log.Info().Str("key", keyToKill).Msg("Killing ")
+	keyToKill := request.Key
+	Log.Info().Str("request", keyToKill).Msg("Killing ")
 	killKey(&keys, keyToKill)
 	return &apikeyserver.GenericKillResponse{Result: true}, nil
 }
 
-func (s *server) PermKillKey(ctx context.Context, key *apikeyserver.PermRequestKillKey) (*apikeyserver.GenericKillResponse, error) {
+func (s *server) PermKillKey(ctx context.Context, request *apikeyserver.RequestPermKillKey) (*apikeyserver.GenericKillResponse, error) {
 	Log.Debug().Caller().Msg("PermKillKey()")
-	keyToKill := key.Key
-	Log.Info().Str("key", keyToKill).Msg("Permanently killing ")
+	keyToKill := request.Key
+	Log.Info().Str("request", keyToKill).Msg("Permanently killing ")
 	permKillKey(&keys, keyToKill)
 	return &apikeyserver.GenericKillResponse{Result: true}, nil
 }
@@ -82,7 +85,5 @@ func (s *server) GetServerInfo(ctx context.Context, request *apikeyserver.Reques
 	Log.Debug().Caller().Msg("GetServerInfo()")
 	Log.Info().Str("requester", request.Requester).Str("fieldmask", request.FieldMask.String()).Msg("Server Info")
 
-	res := apikeyserver.GetServerInfoResponse{}
-
-	return collectServerInfo(&keys, request, &res), nil
+	return collectServerInfo(&keys, request), nil
 }

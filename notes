@@ -1,0 +1,9 @@
+
+using slice:
+anyLeft() 30s - high 190s
+levelKeyUses() around 150
+
+using priority queue:
+
+Command to recompile proto file
+C:\Users\dryack\go\src\apiKeyServer\apikeyserver> protoc --ruby_out=./ruby --python_out=./python --js_out=./js --csharp_out=./csharp --cpp_out=./cpp --php_out=./php --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative apiKeyServer.proto

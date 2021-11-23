@@ -128,18 +128,19 @@ func levelKeyUses(keys *Keys, keyType string) (string, string) {
 
 // TODO: eliminate this struct, see comment at next() below
 type getKeyResponse struct {
-	key       string
-	name      string
-	keyType   string
-	time      int64
-	exhausted bool
+	key                  string
+	name                 string
+	keyType              string
+	time                 int64
+	keyResponseRemaining []*apikeyserver.KeyResponseRemaining
+	exhausted            bool
 }
 
 // TODO: refactor to accept pointer to GetKeyResponse and replace type struct getKeyResponse usage
 // return a key for use by requester
-func next(keys *Keys, keyType string, acceptExhaustion bool) *getKeyResponse {
+func next(keys *Keys, keyType string, acceptExhaustion bool) *apikeyserver.GetKeyResponse {
 	Log.Debug().Caller().Str("keyType", keyType).Msg("next()")
-	firstrun := 0
+	firstrun := 0 // TODO: this is going to be subject to concurrency issues; will need to puzzle it out before threading is done
 
 	for {
 		Log.Debug().Str("runs", strconv.Itoa(firstrun)).Msg("next loop running")
@@ -149,17 +150,19 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *getKeyResponse {
 			keysForSample := fmt.Sprintf("%v", keys.Apikeys)
 			Sampled.Debug().Msg(keysForSample)
 
-			return &getKeyResponse{
-				name:      name,
-				key:       key,
-				keyType:   keyType, // returning the *requested* keytype - not the available keytypes for a given record
-				time:      time.Now().UnixNano(),
-				exhausted: false,
+			keyTypesRemaining := getKeyTypesRemaining(keys, keyType)
+			return &apikeyserver.GetKeyResponse{
+				Name:      name,
+				Key:       key,
+				Type:      keyType, // returning the *requested* keytype - not the available keytypes for a given record
+				Time:      time.Now().UnixNano(),
+				Items:     keyTypesRemaining,
+				Exhausted: false,
 			}
 		} else if acceptExhaustion {
-			return &getKeyResponse{
-				time:      time.Now().UnixNano(),
-				exhausted: true,
+			return &apikeyserver.GetKeyResponse{
+				Time:      time.Now().UnixNano(),
+				Exhausted: true,
 			}
 		}
 		// we're out of keys.  if this is our first time at exhaustion this minute, print a message.  subsequent loops
@@ -172,6 +175,22 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *getKeyResponse {
 		firstrun++
 		time.Sleep(1 * time.Second)
 	}
+}
+
+func getKeyTypesRemaining(keys *Keys, keyType string) []*apikeyserver.KeyResponseRemaining {
+	mutexKeys.Lock()
+	defer mutexKeys.Unlock()
+	var keyTypesRemaining []*apikeyserver.KeyResponseRemaining
+	for _, v := range keys.Apikeys {
+		if contains(v.Types, keyType) {
+			k := &apikeyserver.KeyResponseRemaining{
+				KeyResponseTypeNames: strings.Join(v.Types, ","),
+				TypeRemaining:        uint32(v.CurrentlyRemaining),
+			}
+			keyTypesRemaining = append(keyTypesRemaining, k)
+		}
+	}
+	return keyTypesRemaining
 }
 
 func killKey(keys *Keys, keyToKill string) {
@@ -201,7 +220,15 @@ func permKillKey(keys *Keys, keyToKill string) {
 	}
 }
 
-func collectServerInfo(keys *Keys, req *apikeyserver.RequestServerInfo, res *apikeyserver.GetServerInfoResponse) *apikeyserver.GetServerInfoResponse {
+func getTotalKills(keys *Keys) uint64 {
+	var res uint64
+	for _, v := range keys.Apikeys {
+		res += uint64(v.Kills)
+	}
+	return res
+}
+
+func collectServerInfo(keys *Keys, req *apikeyserver.RequestServerInfo) *apikeyserver.GetServerInfoResponse {
 	uptime := time.Since(keys.StartupTime)
 
 	var totKilled uint32
@@ -223,17 +250,21 @@ func collectServerInfo(keys *Keys, req *apikeyserver.RequestServerInfo, res *api
 		}
 		keyDetails = append(keyDetails, key)
 	}
-	mutexKeys.Unlock()
 
-	res.ServerVersion = serverVersion
-	res.KeyExhaustions = keys.TotalExhaustions
-	res.TotalKeysServed = keys.TotalKeysServed
-	res.TotalAvailableUsesPerMin = uint64(keys.TotalPerMinute)
-	res.KeyNamesPermaKilled = strings.Join(permKilled, ", ")
-	res.Items = keyDetails
-	res.Time = time.Now().UnixNano()
-	res.Uptime = int64(uptime)
-	res.AvgKeysServedPerMin = float32((float64(keys.TotalKeysServed)) / uptime.Minutes())
+	res := &apikeyserver.GetServerInfoResponse{
+		ServerVersion:            serverVersion,
+		KeyExhaustions:           keys.TotalExhaustions,
+		TotalAvailableUsesPerMin: keys.TotalKeysServed,
+		TotalKeysServed:          uint64(keys.TotalPerMinute),
+		TotalKeysKilled:          getTotalKills(keys),
+		KeyNamesPermaKilled:      strings.Join(permKilled, ", "),
+		Items:                    keyDetails,
+		Time:                     time.Now().UnixNano(),
+		Uptime:                   int64(uptime),
+		AvgKeysServedPerMin:      float32((float64(keys.TotalKeysServed)) / uptime.Minutes()),
+	}
+
+	mutexKeys.Unlock()
 
 	fmutils.Filter(res, req.FieldMask.GetPaths())
 	return res
