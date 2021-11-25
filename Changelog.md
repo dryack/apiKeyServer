@@ -1,4 +1,6 @@
-######   v1.21 
+######   v1.30
+major changes to server feature set. simple concurrency support.
+######   v1.21
 restructured project files
 ######   v1.2
 introduced permanent killing of keys (key will be unusable until the program is restarted) 
