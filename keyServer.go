@@ -21,7 +21,6 @@ package main
 import (
 	"apiKeyServer/apikeyserver"
 	"context"
-	"fmt"
 	"github.com/mennanov/fmutils"
 )
 
@@ -38,29 +37,6 @@ func (s *server) GetKey(ctx context.Context, request *apikeyserver.RequestKey) (
 	Log.Info().Str("request", reqStr).Str("type", reqType).Msg("Received request")
 	res := next(&keys, reqType, acceptExhaustion)
 
-	// TODO: extract to method that can work with KeyResponseRemaining and KeyDetailsRespons
-	//var keysLeft []*apikeyserver.KeyResponseRemaining
-
-	//mutexKeys.Lock()
-	//for _, v := range keys.Apikeys {
-	//	types := strings.Join(v.Types, ", ")
-	//	key := &apikeyserver.KeyResponseRemaining{
-	//		KeyResponseTypeNames: types,
-	//		TypeRemaining:        uint32(v.CurrentlyRemaining),
-	//	}
-	//	keysLeft = append(keysLeft, key)
-	//}
-	//mutexKeys.Unlock()
-	//// end extract method
-	//res := &apikeyserver.GetKeyResponse{
-	//	Key:       responseStruct.key,
-	//	Name:      responseStruct.name,
-	//	Type:      responseStruct.keyType,
-	//	Time:      responseStruct.time,
-	//	Exhausted: responseStruct.exhausted,
-	//	Items:     keysLeft,
-	//}
-	fmt.Println(res.Items)
 	fmutils.Filter(res, request.FieldMask.GetPaths())
 	return res, nil
 }

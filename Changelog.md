@@ -1,5 +1,8 @@
+######   v1.31
+keys remaining (by type) now available when requesting a key
 ######   v1.30
-major changes to server feature set. simple concurrency support.
+major changes to server feature set.  fieldmasks can be set by the client to limit data returned by server
+simple concurrency support.
 ######   v1.21
 restructured project files
 ######   v1.2
