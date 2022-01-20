@@ -7,3 +7,19 @@ using priority queue:
 
 Command to recompile proto file
 C:\Users\dryack\go\src\apiKeyServer\apikeyserver> protoc --ruby_out=./ruby --python_out=./python --js_out=./js --csharp_out=./csharp --cpp_out=./cpp --php_out=./php --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative apiKeyServer.proto
+
+
+bitfields to tell us which api settings a key has available:
+user:
+42 options (8 always public)
+faction:
+33 options (3 always public)
+company:
+9 options (3 always public)
+
+34+30+6: 70 bits
+64 bits + 8 bits
+
+---------------------------
+
+func to turn off a key until TIME, or for PERIOD

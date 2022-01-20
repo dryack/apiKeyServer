@@ -23,6 +23,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/mennanov/fmutils"
+	"strconv"
 )
 
 type server struct {
@@ -39,27 +40,27 @@ func (s *server) GetKey(ctx context.Context, request *apikeyserver.RequestKey) (
 	res := next(&keys, reqType, acceptExhaustion)
 
 	// TODO: extract to method that can work with KeyResponseRemaining and KeyDetailsRespons
-	//var keysLeft []*apikeyserver.KeyResponseRemaining
+	// var keysLeft []*apikeyserver.KeyResponseRemaining
 
-	//mutexKeys.Lock()
-	//for _, v := range keys.Apikeys {
+	// mutexKeys.Lock()
+	// for _, v := range keys.Apikeys {
 	//	types := strings.Join(v.Types, ", ")
 	//	key := &apikeyserver.KeyResponseRemaining{
 	//		KeyResponseTypeNames: types,
 	//		TypeRemaining:        uint32(v.CurrentlyRemaining),
 	//	}
 	//	keysLeft = append(keysLeft, key)
-	//}
-	//mutexKeys.Unlock()
-	//// end extract method
-	//res := &apikeyserver.GetKeyResponse{
+	// }
+	// mutexKeys.Unlock()
+	// // end extract method
+	// res := &apikeyserver.GetKeyResponse{
 	//	Key:       responseStruct.key,
 	//	Name:      responseStruct.name,
 	//	Type:      responseStruct.keyType,
 	//	Time:      responseStruct.time,
 	//	Exhausted: responseStruct.exhausted,
 	//	Items:     keysLeft,
-	//}
+	// }
 	fmt.Println(res.Items)
 	fmutils.Filter(res, request.FieldMask.GetPaths())
 	return res, nil
@@ -79,6 +80,15 @@ func (s *server) PermKillKey(ctx context.Context, request *apikeyserver.RequestP
 	Log.Info().Str("request", keyToKill).Msg("Permanently killing ")
 	permKillKey(&keys, keyToKill)
 	return &apikeyserver.GenericKillResponse{Result: true}, nil
+}
+
+func (s *server) TimedKillKey(ctx context.Context, request *apikeyserver.RequestTimedKillKey) (*apikeyserver.TimedKillResponse, error) {
+	Log.Debug().Caller().Msg("TimedKillKey()")
+	keyToKill := request.Key
+	timeToReturn := request.ReturnTime
+	Log.Info().Str("request", keyToKill).Str("return_to_service", strconv.FormatInt(timeToReturn, 10)).Msg("Temporarily killing")
+	tempKillKey(&keys, keyToKill, timeToReturn)
+	return &apikeyserver.TimedKillResponse{Result: &apikeyserver.GenericKillResponse{Result: true}, ReturnToService: timeToReturn}, nil
 }
 
 func (s *server) GetServerInfo(ctx context.Context, request *apikeyserver.RequestServerInfo) (*apikeyserver.GetServerInfoResponse, error) {

@@ -83,11 +83,24 @@ message RequestPermKillKey {
     int64 time = 4; // unixNano
 }
 
+// Request a key be killed for until t Time
+message RequestTimedKillKey {
+    string requester = 1;
+    string key = 2;
+    string name = 3;
+    int64 time = 4; // unixNano
+    int64 returnTime = 5; // time when key will be returned to service
+}
+
 // response for RequestKillKey and RequestPermKillKey
 message GenericKillResponse {
     bool result = 1;
     int64 time = 2; // unixNano
+}
 
+message TimedKillResponse {
+    GenericKillResponse result = 1;
+    int64 returnToService = 2; //unixNano
 }
 
 // response for RequestServerInfo
