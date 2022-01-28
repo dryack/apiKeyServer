@@ -155,7 +155,7 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *apikeyserver.GetKe
 			keysForSample := fmt.Sprintf("%v", keys.Apikeys)
 			Sampled.Debug().Msg(keysForSample)
 
-			keyTypesRemaining := getKeyTypesRemaining(keys, keyType)
+			keyTypesRemaining := getKeyTypesRemaining(keys)
 			return &apikeyserver.GetKeyResponse{
 				Name:      name,
 				Key:       key,
@@ -183,18 +183,26 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *apikeyserver.GetKe
 	}
 }
 
-func getKeyTypesRemaining(keys *Keys, keyType string) []*apikeyserver.KeyResponseRemaining {
+func getKeyTypesRemaining(keys *Keys) []*apikeyserver.KeyResponseRemaining {
+	Log.Debug().Caller().Msg("getKeyTypesRemaining()")
 	mutexKeys.Lock()
 	defer mutexKeys.Unlock()
 	var keyTypesRemaining []*apikeyserver.KeyResponseRemaining
+	keyMap := make(map[string]uint32)
 	for _, v := range keys.Apikeys {
-		if contains(v.Types, keyType) {
-			k := &apikeyserver.KeyResponseRemaining{
-				KeyResponseTypeNames: strings.Join(v.Types, ","),
-				TypeRemaining:        uint32(v.CurrentlyRemaining),
+		for _, i := range v.Types {
+			if _, ok := keyMap[i]; ok {
+				keyMap[i] += uint32(v.CurrentlyRemaining)
 			}
-			keyTypesRemaining = append(keyTypesRemaining, k)
+			keyMap[i] = uint32(v.CurrentlyRemaining)
 		}
+	}
+	for k, v := range keyMap {
+		k := &apikeyserver.KeyResponseRemaining{
+			KeyResponseTypeNames: k,
+			TypeRemaining:        v,
+		}
+		keyTypesRemaining = append(keyTypesRemaining, k)
 	}
 	return keyTypesRemaining
 }

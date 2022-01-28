@@ -72,8 +72,8 @@ var (
 
 // TODO: Options for logging; turn it off, change logfile location, etc.
 func init() {
-	consoleLogging := flag.Bool("console", false, "display to console in addition to log")
-	debug := flag.Bool("debug", false, "sets log level to debug")
+	consoleLogging := flag.Bool("console", true, "display to console in addition to log")
+	debug := flag.Bool("debug", true, "sets log level to debug")
 	flag.Parse()
 
 	logfile, err := os.OpenFile("./apikeyserver.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
