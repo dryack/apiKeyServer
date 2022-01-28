@@ -29,6 +29,7 @@ service ApiKeyServer {
     rpc GetKey(RequestKey) returns (GetKeyResponse) {}
     rpc KillKey(RequestKillKey) returns (GenericKillResponse) {}
     rpc PermKillKey(RequestPermKillKey) returns (GenericKillResponse) {}
+    rpc TimedKillKey(RequestTimedKillKey) returns (TimedKillResponse) {}
     rpc GetServerInfo(RequestServerInfo) returns (GetServerInfoResponse) {}
 }
 

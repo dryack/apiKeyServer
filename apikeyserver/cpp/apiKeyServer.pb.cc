@@ -418,17 +418,19 @@ const char descriptor_table_protodef_apiKeyServer_2eproto[] PROTOBUF_SECTION_VAR
   "(\003\022\016\n\006uptime\030\t \001(\003\022\033\n\023avgKeysServedPerMi"
   "n\030\n \001(\002\"^\n\022KeyDetailsResponse\022\014\n\004name\030\001 "
   "\001(\t\022\r\n\005types\030\002 \001(\t\022\014\n\004uses\030\003 \001(\r\022\r\n\005kill"
-  "s\030\004 \001(\r\022\016\n\006active\030\005 \001(\0102\317\002\n\014ApiKeyServer"
+  "s\030\004 \001(\r\022\016\n\006active\030\005 \001(\0102\245\003\n\014ApiKeyServer"
   "\022B\n\006GetKey\022\030.apikeyserver.RequestKey\032\034.a"
   "pikeyserver.GetKeyResponse\"\000\022L\n\007KillKey\022"
   "\034.apikeyserver.RequestKillKey\032!.apikeyse"
   "rver.GenericKillResponse\"\000\022T\n\013PermKillKe"
   "y\022 .apikeyserver.RequestPermKillKey\032!.ap"
-  "ikeyserver.GenericKillResponse\"\000\022W\n\rGetS"
-  "erverInfo\022\037.apikeyserver.RequestServerIn"
-  "fo\032#.apikeyserver.GetServerInfoResponse\""
-  "\000B&\n\004mainB\014apiKeyServerP\001Z\016./apikeyserve"
-  "rb\006proto3"
+  "ikeyserver.GenericKillResponse\"\000\022T\n\014Time"
+  "dKillKey\022!.apikeyserver.RequestTimedKill"
+  "Key\032\037.apikeyserver.TimedKillResponse\"\000\022W"
+  "\n\rGetServerInfo\022\037.apikeyserver.RequestSe"
+  "rverInfo\032#.apikeyserver.GetServerInfoRes"
+  "ponse\"\000B&\n\004mainB\014apiKeyServerP\001Z\016./apike"
+  "yserverb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_apiKeyServer_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2ffield_5fmask_2eproto,
@@ -450,7 +452,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_api
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_apiKeyServer_2eproto_once;
 static bool descriptor_table_apiKeyServer_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_apiKeyServer_2eproto = {
-  &descriptor_table_apiKeyServer_2eproto_initialized, descriptor_table_protodef_apiKeyServer_2eproto, "apiKeyServer.proto", 1729,
+  &descriptor_table_apiKeyServer_2eproto_initialized, descriptor_table_protodef_apiKeyServer_2eproto, "apiKeyServer.proto", 1815,
   &descriptor_table_apiKeyServer_2eproto_once, descriptor_table_apiKeyServer_2eproto_sccs, descriptor_table_apiKeyServer_2eproto_deps, 12, 1,
   schemas, file_default_instances, TableStruct_apiKeyServer_2eproto::offsets,
   file_level_metadata_apiKeyServer_2eproto, 12, file_level_enum_descriptors_apiKeyServer_2eproto, file_level_service_descriptors_apiKeyServer_2eproto,
