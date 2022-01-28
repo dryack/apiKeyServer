@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='apikeyserver',
   syntax='proto3',
   serialized_options=b'\n\004mainB\014apiKeyServerP\001Z\016./apikeyserver',
-  serialized_pb=b'\n\x12\x61piKeyServer.proto\x12\x0c\x61pikeyserver\x1a google/protobuf/field_mask.proto\"w\n\nRequestKey\x12\x11\n\trequester\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x18\n\x10\x61\x63\x63\x65ptExhaustion\x18\x03 \x01(\x08\x12.\n\nfield_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"V\n\x11RequestServerInfo\x12\x11\n\trequester\x18\x01 \x01(\t\x12.\n\nfield_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\x8d\x01\n\x0eGetKeyResponse\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04time\x18\x04 \x01(\x03\x12\x31\n\x05items\x18\x05 \x03(\x0b\x32\".apikeyserver.KeyResponseRemaining\x12\x11\n\texhausted\x18\x06 \x01(\x08\"K\n\x14KeyResponseRemaining\x12\x1c\n\x14KeyResponseTypeNames\x18\x01 \x01(\t\x12\x15\n\rtypeRemaining\x18\x02 \x01(\r\"(\n\x14KeyResponseTypeNames\x12\x10\n\x08typeName\x18\x01 \x01(\t\"L\n\x0eRequestKillKey\x12\x11\n\trequester\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04time\x18\x04 \x01(\x03\"P\n\x12RequestPermKillKey\x12\x11\n\trequester\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04time\x18\x04 \x01(\x03\"3\n\x13GenericKillResponse\x12\x0e\n\x06result\x18\x01 \x01(\x08\x12\x0c\n\x04time\x18\x02 \x01(\x03\"\xa3\x02\n\x15GetServerInfoResponse\x12\x15\n\rserverVersion\x18\x01 \x01(\t\x12\x16\n\x0ekeyExhaustions\x18\x02 \x01(\r\x12 \n\x18totalAvailableUsesPerMin\x18\x03 \x01(\x04\x12\x17\n\x0ftotalKeysServed\x18\x04 \x01(\x04\x12\x17\n\x0ftotalKeysKilled\x18\x05 \x01(\x04\x12\x1b\n\x13keyNamesPermaKilled\x18\x06 \x01(\t\x12/\n\x05items\x18\x07 \x03(\x0b\x32 .apikeyserver.KeyDetailsResponse\x12\x0c\n\x04time\x18\x08 \x01(\x03\x12\x0e\n\x06uptime\x18\t \x01(\x03\x12\x1b\n\x13\x61vgKeysServedPerMin\x18\n \x01(\x02\"^\n\x12KeyDetailsResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05types\x18\x02 \x01(\t\x12\x0c\n\x04uses\x18\x03 \x01(\r\x12\r\n\x05kills\x18\x04 \x01(\r\x12\x0e\n\x06\x61\x63tive\x18\x05 \x01(\x08\x32\xcf\x02\n\x0c\x41piKeyServer\x12\x42\n\x06GetKey\x12\x18.apikeyserver.RequestKey\x1a\x1c.apikeyserver.GetKeyResponse\"\x00\x12L\n\x07KillKey\x12\x1c.apikeyserver.RequestKillKey\x1a!.apikeyserver.GenericKillResponse\"\x00\x12T\n\x0bPermKillKey\x12 .apikeyserver.RequestPermKillKey\x1a!.apikeyserver.GenericKillResponse\"\x00\x12W\n\rGetServerInfo\x12\x1f.apikeyserver.RequestServerInfo\x1a#.apikeyserver.GetServerInfoResponse\"\x00\x42&\n\x04mainB\x0c\x61piKeyServerP\x01Z\x0e./apikeyserverb\x06proto3'
+  serialized_pb=b'\n\x12\x61piKeyServer.proto\x12\x0c\x61pikeyserver\x1a google/protobuf/field_mask.proto\"w\n\nRequestKey\x12\x11\n\trequester\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x18\n\x10\x61\x63\x63\x65ptExhaustion\x18\x03 \x01(\x08\x12.\n\nfield_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"V\n\x11RequestServerInfo\x12\x11\n\trequester\x18\x01 \x01(\t\x12.\n\nfield_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\x8d\x01\n\x0eGetKeyResponse\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04time\x18\x04 \x01(\x03\x12\x31\n\x05items\x18\x05 \x03(\x0b\x32\".apikeyserver.KeyResponseRemaining\x12\x11\n\texhausted\x18\x06 \x01(\x08\"K\n\x14KeyResponseRemaining\x12\x1c\n\x14KeyResponseTypeNames\x18\x01 \x01(\t\x12\x15\n\rtypeRemaining\x18\x02 \x01(\r\"(\n\x14KeyResponseTypeNames\x12\x10\n\x08typeName\x18\x01 \x01(\t\"L\n\x0eRequestKillKey\x12\x11\n\trequester\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04time\x18\x04 \x01(\x03\"P\n\x12RequestPermKillKey\x12\x11\n\trequester\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04time\x18\x04 \x01(\x03\"e\n\x13RequestTimedKillKey\x12\x11\n\trequester\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04time\x18\x04 \x01(\x03\x12\x12\n\nreturnTime\x18\x05 \x01(\x03\"3\n\x13GenericKillResponse\x12\x0e\n\x06result\x18\x01 \x01(\x08\x12\x0c\n\x04time\x18\x02 \x01(\x03\"_\n\x11TimedKillResponse\x12\x31\n\x06result\x18\x01 \x01(\x0b\x32!.apikeyserver.GenericKillResponse\x12\x17\n\x0freturnToService\x18\x02 \x01(\x03\"\xa3\x02\n\x15GetServerInfoResponse\x12\x15\n\rserverVersion\x18\x01 \x01(\t\x12\x16\n\x0ekeyExhaustions\x18\x02 \x01(\r\x12 \n\x18totalAvailableUsesPerMin\x18\x03 \x01(\x04\x12\x17\n\x0ftotalKeysServed\x18\x04 \x01(\x04\x12\x17\n\x0ftotalKeysKilled\x18\x05 \x01(\x04\x12\x1b\n\x13keyNamesPermaKilled\x18\x06 \x01(\t\x12/\n\x05items\x18\x07 \x03(\x0b\x32 .apikeyserver.KeyDetailsResponse\x12\x0c\n\x04time\x18\x08 \x01(\x03\x12\x0e\n\x06uptime\x18\t \x01(\x03\x12\x1b\n\x13\x61vgKeysServedPerMin\x18\n \x01(\x02\"^\n\x12KeyDetailsResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05types\x18\x02 \x01(\t\x12\x0c\n\x04uses\x18\x03 \x01(\r\x12\r\n\x05kills\x18\x04 \x01(\r\x12\x0e\n\x06\x61\x63tive\x18\x05 \x01(\x08\x32\xa5\x03\n\x0c\x41piKeyServer\x12\x42\n\x06GetKey\x12\x18.apikeyserver.RequestKey\x1a\x1c.apikeyserver.GetKeyResponse\"\x00\x12L\n\x07KillKey\x12\x1c.apikeyserver.RequestKillKey\x1a!.apikeyserver.GenericKillResponse\"\x00\x12T\n\x0bPermKillKey\x12 .apikeyserver.RequestPermKillKey\x1a!.apikeyserver.GenericKillResponse\"\x00\x12T\n\x0cTimedKillKey\x12!.apikeyserver.RequestTimedKillKey\x1a\x1f.apikeyserver.TimedKillResponse\"\x00\x12W\n\rGetServerInfo\x12\x1f.apikeyserver.RequestServerInfo\x1a#.apikeyserver.GetServerInfoResponse\"\x00\x42&\n\x04mainB\x0c\x61piKeyServerP\x01Z\x0e./apikeyserverb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
 
@@ -355,6 +355,65 @@ _REQUESTPERMKILLKEY = _descriptor.Descriptor(
 )
 
 
+_REQUESTTIMEDKILLKEY = _descriptor.Descriptor(
+  name='RequestTimedKillKey',
+  full_name='apikeyserver.RequestTimedKillKey',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requester', full_name='apikeyserver.RequestTimedKillKey.requester', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='apikeyserver.RequestTimedKillKey.key', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='apikeyserver.RequestTimedKillKey.name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time', full_name='apikeyserver.RequestTimedKillKey.time', index=3,
+      number=4, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='returnTime', full_name='apikeyserver.RequestTimedKillKey.returnTime', index=4,
+      number=5, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=702,
+  serialized_end=803,
+)
+
+
 _GENERICKILLRESPONSE = _descriptor.Descriptor(
   name='GenericKillResponse',
   full_name='apikeyserver.GenericKillResponse',
@@ -388,8 +447,46 @@ _GENERICKILLRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=702,
-  serialized_end=753,
+  serialized_start=805,
+  serialized_end=856,
+)
+
+
+_TIMEDKILLRESPONSE = _descriptor.Descriptor(
+  name='TimedKillResponse',
+  full_name='apikeyserver.TimedKillResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='result', full_name='apikeyserver.TimedKillResponse.result', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='returnToService', full_name='apikeyserver.TimedKillResponse.returnToService', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=858,
+  serialized_end=953,
 )
 
 
@@ -482,8 +579,8 @@ _GETSERVERINFORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=756,
-  serialized_end=1047,
+  serialized_start=956,
+  serialized_end=1247,
 )
 
 
@@ -541,13 +638,14 @@ _KEYDETAILSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1049,
-  serialized_end=1143,
+  serialized_start=1249,
+  serialized_end=1343,
 )
 
 _REQUESTKEY.fields_by_name['field_mask'].message_type = google_dot_protobuf_dot_field__mask__pb2._FIELDMASK
 _REQUESTSERVERINFO.fields_by_name['field_mask'].message_type = google_dot_protobuf_dot_field__mask__pb2._FIELDMASK
 _GETKEYRESPONSE.fields_by_name['items'].message_type = _KEYRESPONSEREMAINING
+_TIMEDKILLRESPONSE.fields_by_name['result'].message_type = _GENERICKILLRESPONSE
 _GETSERVERINFORESPONSE.fields_by_name['items'].message_type = _KEYDETAILSRESPONSE
 DESCRIPTOR.message_types_by_name['RequestKey'] = _REQUESTKEY
 DESCRIPTOR.message_types_by_name['RequestServerInfo'] = _REQUESTSERVERINFO
@@ -556,7 +654,9 @@ DESCRIPTOR.message_types_by_name['KeyResponseRemaining'] = _KEYRESPONSEREMAINING
 DESCRIPTOR.message_types_by_name['KeyResponseTypeNames'] = _KEYRESPONSETYPENAMES
 DESCRIPTOR.message_types_by_name['RequestKillKey'] = _REQUESTKILLKEY
 DESCRIPTOR.message_types_by_name['RequestPermKillKey'] = _REQUESTPERMKILLKEY
+DESCRIPTOR.message_types_by_name['RequestTimedKillKey'] = _REQUESTTIMEDKILLKEY
 DESCRIPTOR.message_types_by_name['GenericKillResponse'] = _GENERICKILLRESPONSE
+DESCRIPTOR.message_types_by_name['TimedKillResponse'] = _TIMEDKILLRESPONSE
 DESCRIPTOR.message_types_by_name['GetServerInfoResponse'] = _GETSERVERINFORESPONSE
 DESCRIPTOR.message_types_by_name['KeyDetailsResponse'] = _KEYDETAILSRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -610,12 +710,26 @@ RequestPermKillKey = _reflection.GeneratedProtocolMessageType('RequestPermKillKe
   })
 _sym_db.RegisterMessage(RequestPermKillKey)
 
+RequestTimedKillKey = _reflection.GeneratedProtocolMessageType('RequestTimedKillKey', (_message.Message,), {
+  'DESCRIPTOR' : _REQUESTTIMEDKILLKEY,
+  '__module__' : 'apiKeyServer_pb2'
+  # @@protoc_insertion_point(class_scope:apikeyserver.RequestTimedKillKey)
+  })
+_sym_db.RegisterMessage(RequestTimedKillKey)
+
 GenericKillResponse = _reflection.GeneratedProtocolMessageType('GenericKillResponse', (_message.Message,), {
   'DESCRIPTOR' : _GENERICKILLRESPONSE,
   '__module__' : 'apiKeyServer_pb2'
   # @@protoc_insertion_point(class_scope:apikeyserver.GenericKillResponse)
   })
 _sym_db.RegisterMessage(GenericKillResponse)
+
+TimedKillResponse = _reflection.GeneratedProtocolMessageType('TimedKillResponse', (_message.Message,), {
+  'DESCRIPTOR' : _TIMEDKILLRESPONSE,
+  '__module__' : 'apiKeyServer_pb2'
+  # @@protoc_insertion_point(class_scope:apikeyserver.TimedKillResponse)
+  })
+_sym_db.RegisterMessage(TimedKillResponse)
 
 GetServerInfoResponse = _reflection.GeneratedProtocolMessageType('GetServerInfoResponse', (_message.Message,), {
   'DESCRIPTOR' : _GETSERVERINFORESPONSE,
@@ -640,8 +754,8 @@ _APIKEYSERVER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1146,
-  serialized_end=1481,
+  serialized_start=1346,
+  serialized_end=1767,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetKey',
@@ -671,9 +785,18 @@ _APIKEYSERVER = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
+    name='TimedKillKey',
+    full_name='apikeyserver.ApiKeyServer.TimedKillKey',
+    index=3,
+    containing_service=None,
+    input_type=_REQUESTTIMEDKILLKEY,
+    output_type=_TIMEDKILLRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
     name='GetServerInfo',
     full_name='apikeyserver.ApiKeyServer.GetServerInfo',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_REQUESTSERVERINFO,
     output_type=_GETSERVERINFORESPONSE,

@@ -14,6 +14,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_apiKeyServer_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GenericKillResponse_apiKeyServer_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_apiKeyServer_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_KeyDetailsResponse_apiKeyServer_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_apiKeyServer_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_KeyResponseRemaining_apiKeyServer_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2ffield_5fmask_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_FieldMask_google_2fprotobuf_2ffield_5fmask_2eproto;
@@ -46,10 +47,18 @@ class RequestPermKillKeyDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RequestPermKillKey> _instance;
 } _RequestPermKillKey_default_instance_;
+class RequestTimedKillKeyDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RequestTimedKillKey> _instance;
+} _RequestTimedKillKey_default_instance_;
 class GenericKillResponseDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GenericKillResponse> _instance;
 } _GenericKillResponse_default_instance_;
+class TimedKillResponseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<TimedKillResponse> _instance;
+} _TimedKillResponse_default_instance_;
 class GetServerInfoResponseDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GetServerInfoResponse> _instance;
@@ -203,7 +212,36 @@ static void InitDefaultsscc_info_RequestServerInfo_apiKeyServer_2eproto() {
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RequestServerInfo_apiKeyServer_2eproto}, {
       &scc_info_FieldMask_google_2fprotobuf_2ffield_5fmask_2eproto.base,}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_apiKeyServer_2eproto[10];
+static void InitDefaultsscc_info_RequestTimedKillKey_apiKeyServer_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::apikeyserver::_RequestTimedKillKey_default_instance_;
+    new (ptr) ::apikeyserver::RequestTimedKillKey();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::apikeyserver::RequestTimedKillKey::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RequestTimedKillKey_apiKeyServer_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RequestTimedKillKey_apiKeyServer_2eproto}, {}};
+
+static void InitDefaultsscc_info_TimedKillResponse_apiKeyServer_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::apikeyserver::_TimedKillResponse_default_instance_;
+    new (ptr) ::apikeyserver::TimedKillResponse();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::apikeyserver::TimedKillResponse::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_TimedKillResponse_apiKeyServer_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_TimedKillResponse_apiKeyServer_2eproto}, {
+      &scc_info_GenericKillResponse_apiKeyServer_2eproto.base,}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_apiKeyServer_2eproto[12];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_apiKeyServer_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_apiKeyServer_2eproto = nullptr;
 
@@ -267,12 +305,29 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_apiKeyServer_2eproto::offsets[
   PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestPermKillKey, name_),
   PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestPermKillKey, time_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestTimedKillKey, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestTimedKillKey, requester_),
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestTimedKillKey, key_),
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestTimedKillKey, name_),
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestTimedKillKey, time_),
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::RequestTimedKillKey, returntime_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::apikeyserver::GenericKillResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::apikeyserver::GenericKillResponse, result_),
   PROTOBUF_FIELD_OFFSET(::apikeyserver::GenericKillResponse, time_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::TimedKillResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::TimedKillResponse, result_),
+  PROTOBUF_FIELD_OFFSET(::apikeyserver::TimedKillResponse, returntoservice_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::apikeyserver::GetServerInfoResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -307,9 +362,11 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 34, -1, sizeof(::apikeyserver::KeyResponseTypeNames)},
   { 40, -1, sizeof(::apikeyserver::RequestKillKey)},
   { 49, -1, sizeof(::apikeyserver::RequestPermKillKey)},
-  { 58, -1, sizeof(::apikeyserver::GenericKillResponse)},
-  { 65, -1, sizeof(::apikeyserver::GetServerInfoResponse)},
-  { 80, -1, sizeof(::apikeyserver::KeyDetailsResponse)},
+  { 58, -1, sizeof(::apikeyserver::RequestTimedKillKey)},
+  { 68, -1, sizeof(::apikeyserver::GenericKillResponse)},
+  { 75, -1, sizeof(::apikeyserver::TimedKillResponse)},
+  { 82, -1, sizeof(::apikeyserver::GetServerInfoResponse)},
+  { 97, -1, sizeof(::apikeyserver::KeyDetailsResponse)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -320,7 +377,9 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_KeyResponseTypeNames_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_RequestKillKey_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_RequestPermKillKey_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_RequestTimedKillKey_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_GenericKillResponse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_TimedKillResponse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_GetServerInfoResponse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::apikeyserver::_KeyDetailsResponse_default_instance_),
 };
@@ -343,8 +402,13 @@ const char descriptor_table_protodef_apiKeyServer_2eproto[] PROTOBUF_SECTION_VAR
   "\n\trequester\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\014\n\004name\030\003"
   " \001(\t\022\014\n\004time\030\004 \001(\003\"P\n\022RequestPermKillKey"
   "\022\021\n\trequester\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\014\n\004name"
-  "\030\003 \001(\t\022\014\n\004time\030\004 \001(\003\"3\n\023GenericKillRespo"
-  "nse\022\016\n\006result\030\001 \001(\010\022\014\n\004time\030\002 \001(\003\"\243\002\n\025Ge"
+  "\030\003 \001(\t\022\014\n\004time\030\004 \001(\003\"e\n\023RequestTimedKill"
+  "Key\022\021\n\trequester\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\014\n\004n"
+  "ame\030\003 \001(\t\022\014\n\004time\030\004 \001(\003\022\022\n\nreturnTime\030\005 "
+  "\001(\003\"3\n\023GenericKillResponse\022\016\n\006result\030\001 \001"
+  "(\010\022\014\n\004time\030\002 \001(\003\"_\n\021TimedKillResponse\0221\n"
+  "\006result\030\001 \001(\0132!.apikeyserver.GenericKill"
+  "Response\022\027\n\017returnToService\030\002 \001(\003\"\243\002\n\025Ge"
   "tServerInfoResponse\022\025\n\rserverVersion\030\001 \001"
   "(\t\022\026\n\016keyExhaustions\030\002 \001(\r\022 \n\030totalAvail"
   "ableUsesPerMin\030\003 \001(\004\022\027\n\017totalKeysServed\030"
@@ -354,22 +418,24 @@ const char descriptor_table_protodef_apiKeyServer_2eproto[] PROTOBUF_SECTION_VAR
   "(\003\022\016\n\006uptime\030\t \001(\003\022\033\n\023avgKeysServedPerMi"
   "n\030\n \001(\002\"^\n\022KeyDetailsResponse\022\014\n\004name\030\001 "
   "\001(\t\022\r\n\005types\030\002 \001(\t\022\014\n\004uses\030\003 \001(\r\022\r\n\005kill"
-  "s\030\004 \001(\r\022\016\n\006active\030\005 \001(\0102\317\002\n\014ApiKeyServer"
+  "s\030\004 \001(\r\022\016\n\006active\030\005 \001(\0102\245\003\n\014ApiKeyServer"
   "\022B\n\006GetKey\022\030.apikeyserver.RequestKey\032\034.a"
   "pikeyserver.GetKeyResponse\"\000\022L\n\007KillKey\022"
   "\034.apikeyserver.RequestKillKey\032!.apikeyse"
   "rver.GenericKillResponse\"\000\022T\n\013PermKillKe"
   "y\022 .apikeyserver.RequestPermKillKey\032!.ap"
-  "ikeyserver.GenericKillResponse\"\000\022W\n\rGetS"
-  "erverInfo\022\037.apikeyserver.RequestServerIn"
-  "fo\032#.apikeyserver.GetServerInfoResponse\""
-  "\000B&\n\004mainB\014apiKeyServerP\001Z\016./apikeyserve"
-  "rb\006proto3"
+  "ikeyserver.GenericKillResponse\"\000\022T\n\014Time"
+  "dKillKey\022!.apikeyserver.RequestTimedKill"
+  "Key\032\037.apikeyserver.TimedKillResponse\"\000\022W"
+  "\n\rGetServerInfo\022\037.apikeyserver.RequestSe"
+  "rverInfo\032#.apikeyserver.GetServerInfoRes"
+  "ponse\"\000B&\n\004mainB\014apiKeyServerP\001Z\016./apike"
+  "yserverb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_apiKeyServer_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2ffield_5fmask_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_apiKeyServer_2eproto_sccs[10] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_apiKeyServer_2eproto_sccs[12] = {
   &scc_info_GenericKillResponse_apiKeyServer_2eproto.base,
   &scc_info_GetKeyResponse_apiKeyServer_2eproto.base,
   &scc_info_GetServerInfoResponse_apiKeyServer_2eproto.base,
@@ -380,14 +446,16 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_api
   &scc_info_RequestKillKey_apiKeyServer_2eproto.base,
   &scc_info_RequestPermKillKey_apiKeyServer_2eproto.base,
   &scc_info_RequestServerInfo_apiKeyServer_2eproto.base,
+  &scc_info_RequestTimedKillKey_apiKeyServer_2eproto.base,
+  &scc_info_TimedKillResponse_apiKeyServer_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_apiKeyServer_2eproto_once;
 static bool descriptor_table_apiKeyServer_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_apiKeyServer_2eproto = {
-  &descriptor_table_apiKeyServer_2eproto_initialized, descriptor_table_protodef_apiKeyServer_2eproto, "apiKeyServer.proto", 1529,
-  &descriptor_table_apiKeyServer_2eproto_once, descriptor_table_apiKeyServer_2eproto_sccs, descriptor_table_apiKeyServer_2eproto_deps, 10, 1,
+  &descriptor_table_apiKeyServer_2eproto_initialized, descriptor_table_protodef_apiKeyServer_2eproto, "apiKeyServer.proto", 1815,
+  &descriptor_table_apiKeyServer_2eproto_once, descriptor_table_apiKeyServer_2eproto_sccs, descriptor_table_apiKeyServer_2eproto_deps, 12, 1,
   schemas, file_default_instances, TableStruct_apiKeyServer_2eproto::offsets,
-  file_level_metadata_apiKeyServer_2eproto, 10, file_level_enum_descriptors_apiKeyServer_2eproto, file_level_service_descriptors_apiKeyServer_2eproto,
+  file_level_metadata_apiKeyServer_2eproto, 12, file_level_enum_descriptors_apiKeyServer_2eproto, file_level_service_descriptors_apiKeyServer_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -2355,6 +2423,340 @@ void RequestPermKillKey::InternalSwap(RequestPermKillKey* other) {
 
 // ===================================================================
 
+void RequestTimedKillKey::InitAsDefaultInstance() {
+}
+class RequestTimedKillKey::_Internal {
+ public:
+};
+
+RequestTimedKillKey::RequestTimedKillKey()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:apikeyserver.RequestTimedKillKey)
+}
+RequestTimedKillKey::RequestTimedKillKey(const RequestTimedKillKey& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  requester_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_requester().empty()) {
+    requester_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.requester_);
+  }
+  key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_key().empty()) {
+    key_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.key_);
+  }
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  ::memcpy(&time_, &from.time_,
+    static_cast<size_t>(reinterpret_cast<char*>(&returntime_) -
+    reinterpret_cast<char*>(&time_)) + sizeof(returntime_));
+  // @@protoc_insertion_point(copy_constructor:apikeyserver.RequestTimedKillKey)
+}
+
+void RequestTimedKillKey::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RequestTimedKillKey_apiKeyServer_2eproto.base);
+  requester_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&time_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&returntime_) -
+      reinterpret_cast<char*>(&time_)) + sizeof(returntime_));
+}
+
+RequestTimedKillKey::~RequestTimedKillKey() {
+  // @@protoc_insertion_point(destructor:apikeyserver.RequestTimedKillKey)
+  SharedDtor();
+}
+
+void RequestTimedKillKey::SharedDtor() {
+  requester_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  key_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void RequestTimedKillKey::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const RequestTimedKillKey& RequestTimedKillKey::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RequestTimedKillKey_apiKeyServer_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void RequestTimedKillKey::Clear() {
+// @@protoc_insertion_point(message_clear_start:apikeyserver.RequestTimedKillKey)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  requester_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  key_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&time_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&returntime_) -
+      reinterpret_cast<char*>(&time_)) + sizeof(returntime_));
+  _internal_metadata_.Clear();
+}
+
+const char* RequestTimedKillKey::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string requester = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_requester();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "apikeyserver.RequestTimedKillKey.requester"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string key = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_key();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "apikeyserver.RequestTimedKillKey.key"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string name = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_name();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "apikeyserver.RequestTimedKillKey.name"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 time = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          time_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 returnTime = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          returntime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* RequestTimedKillKey::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:apikeyserver.RequestTimedKillKey)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string requester = 1;
+  if (this->requester().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_requester().data(), static_cast<int>(this->_internal_requester().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "apikeyserver.RequestTimedKillKey.requester");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_requester(), target);
+  }
+
+  // string key = 2;
+  if (this->key().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_key().data(), static_cast<int>(this->_internal_key().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "apikeyserver.RequestTimedKillKey.key");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_key(), target);
+  }
+
+  // string name = 3;
+  if (this->name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "apikeyserver.RequestTimedKillKey.name");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_name(), target);
+  }
+
+  // int64 time = 4;
+  if (this->time() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_time(), target);
+  }
+
+  // int64 returnTime = 5;
+  if (this->returntime() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(5, this->_internal_returntime(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:apikeyserver.RequestTimedKillKey)
+  return target;
+}
+
+size_t RequestTimedKillKey::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:apikeyserver.RequestTimedKillKey)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string requester = 1;
+  if (this->requester().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_requester());
+  }
+
+  // string key = 2;
+  if (this->key().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_key());
+  }
+
+  // string name = 3;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
+  }
+
+  // int64 time = 4;
+  if (this->time() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_time());
+  }
+
+  // int64 returnTime = 5;
+  if (this->returntime() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_returntime());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RequestTimedKillKey::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:apikeyserver.RequestTimedKillKey)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RequestTimedKillKey* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<RequestTimedKillKey>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:apikeyserver.RequestTimedKillKey)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:apikeyserver.RequestTimedKillKey)
+    MergeFrom(*source);
+  }
+}
+
+void RequestTimedKillKey::MergeFrom(const RequestTimedKillKey& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:apikeyserver.RequestTimedKillKey)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.requester().size() > 0) {
+
+    requester_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.requester_);
+  }
+  if (from.key().size() > 0) {
+
+    key_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.key_);
+  }
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.time() != 0) {
+    _internal_set_time(from._internal_time());
+  }
+  if (from.returntime() != 0) {
+    _internal_set_returntime(from._internal_returntime());
+  }
+}
+
+void RequestTimedKillKey::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:apikeyserver.RequestTimedKillKey)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RequestTimedKillKey::CopyFrom(const RequestTimedKillKey& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:apikeyserver.RequestTimedKillKey)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RequestTimedKillKey::IsInitialized() const {
+  return true;
+}
+
+void RequestTimedKillKey::InternalSwap(RequestTimedKillKey* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  requester_.Swap(&other->requester_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  key_.Swap(&other->key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(time_, other->time_);
+  swap(returntime_, other->returntime_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata RequestTimedKillKey::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void GenericKillResponse::InitAsDefaultInstance() {
 }
 class GenericKillResponse::_Internal {
@@ -2563,6 +2965,238 @@ void GenericKillResponse::InternalSwap(GenericKillResponse* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GenericKillResponse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void TimedKillResponse::InitAsDefaultInstance() {
+  ::apikeyserver::_TimedKillResponse_default_instance_._instance.get_mutable()->result_ = const_cast< ::apikeyserver::GenericKillResponse*>(
+      ::apikeyserver::GenericKillResponse::internal_default_instance());
+}
+class TimedKillResponse::_Internal {
+ public:
+  static const ::apikeyserver::GenericKillResponse& result(const TimedKillResponse* msg);
+};
+
+const ::apikeyserver::GenericKillResponse&
+TimedKillResponse::_Internal::result(const TimedKillResponse* msg) {
+  return *msg->result_;
+}
+TimedKillResponse::TimedKillResponse()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:apikeyserver.TimedKillResponse)
+}
+TimedKillResponse::TimedKillResponse(const TimedKillResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from._internal_has_result()) {
+    result_ = new ::apikeyserver::GenericKillResponse(*from.result_);
+  } else {
+    result_ = nullptr;
+  }
+  returntoservice_ = from.returntoservice_;
+  // @@protoc_insertion_point(copy_constructor:apikeyserver.TimedKillResponse)
+}
+
+void TimedKillResponse::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_TimedKillResponse_apiKeyServer_2eproto.base);
+  ::memset(&result_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&returntoservice_) -
+      reinterpret_cast<char*>(&result_)) + sizeof(returntoservice_));
+}
+
+TimedKillResponse::~TimedKillResponse() {
+  // @@protoc_insertion_point(destructor:apikeyserver.TimedKillResponse)
+  SharedDtor();
+}
+
+void TimedKillResponse::SharedDtor() {
+  if (this != internal_default_instance()) delete result_;
+}
+
+void TimedKillResponse::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const TimedKillResponse& TimedKillResponse::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_TimedKillResponse_apiKeyServer_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void TimedKillResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:apikeyserver.TimedKillResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == nullptr && result_ != nullptr) {
+    delete result_;
+  }
+  result_ = nullptr;
+  returntoservice_ = PROTOBUF_LONGLONG(0);
+  _internal_metadata_.Clear();
+}
+
+const char* TimedKillResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .apikeyserver.GenericKillResponse result = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_result(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 returnToService = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          returntoservice_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* TimedKillResponse::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:apikeyserver.TimedKillResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .apikeyserver.GenericKillResponse result = 1;
+  if (this->has_result()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        1, _Internal::result(this), target, stream);
+  }
+
+  // int64 returnToService = 2;
+  if (this->returntoservice() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_returntoservice(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:apikeyserver.TimedKillResponse)
+  return target;
+}
+
+size_t TimedKillResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:apikeyserver.TimedKillResponse)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .apikeyserver.GenericKillResponse result = 1;
+  if (this->has_result()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *result_);
+  }
+
+  // int64 returnToService = 2;
+  if (this->returntoservice() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_returntoservice());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void TimedKillResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:apikeyserver.TimedKillResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  const TimedKillResponse* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<TimedKillResponse>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:apikeyserver.TimedKillResponse)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:apikeyserver.TimedKillResponse)
+    MergeFrom(*source);
+  }
+}
+
+void TimedKillResponse::MergeFrom(const TimedKillResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:apikeyserver.TimedKillResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_result()) {
+    _internal_mutable_result()->::apikeyserver::GenericKillResponse::MergeFrom(from._internal_result());
+  }
+  if (from.returntoservice() != 0) {
+    _internal_set_returntoservice(from._internal_returntoservice());
+  }
+}
+
+void TimedKillResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:apikeyserver.TimedKillResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TimedKillResponse::CopyFrom(const TimedKillResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:apikeyserver.TimedKillResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TimedKillResponse::IsInitialized() const {
+  return true;
+}
+
+void TimedKillResponse::InternalSwap(TimedKillResponse* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(result_, other->result_);
+  swap(returntoservice_, other->returntoservice_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata TimedKillResponse::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -3352,8 +3986,14 @@ template<> PROTOBUF_NOINLINE ::apikeyserver::RequestKillKey* Arena::CreateMaybeM
 template<> PROTOBUF_NOINLINE ::apikeyserver::RequestPermKillKey* Arena::CreateMaybeMessage< ::apikeyserver::RequestPermKillKey >(Arena* arena) {
   return Arena::CreateInternal< ::apikeyserver::RequestPermKillKey >(arena);
 }
+template<> PROTOBUF_NOINLINE ::apikeyserver::RequestTimedKillKey* Arena::CreateMaybeMessage< ::apikeyserver::RequestTimedKillKey >(Arena* arena) {
+  return Arena::CreateInternal< ::apikeyserver::RequestTimedKillKey >(arena);
+}
 template<> PROTOBUF_NOINLINE ::apikeyserver::GenericKillResponse* Arena::CreateMaybeMessage< ::apikeyserver::GenericKillResponse >(Arena* arena) {
   return Arena::CreateInternal< ::apikeyserver::GenericKillResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::apikeyserver::TimedKillResponse* Arena::CreateMaybeMessage< ::apikeyserver::TimedKillResponse >(Arena* arena) {
+  return Arena::CreateInternal< ::apikeyserver::TimedKillResponse >(arena);
 }
 template<> PROTOBUF_NOINLINE ::apikeyserver::GetServerInfoResponse* Arena::CreateMaybeMessage< ::apikeyserver::GetServerInfoResponse >(Arena* arena) {
   return Arena::CreateInternal< ::apikeyserver::GetServerInfoResponse >(arena);

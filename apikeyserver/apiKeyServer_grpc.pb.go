@@ -21,6 +21,7 @@ type ApiKeyServerClient interface {
 	GetKey(ctx context.Context, in *RequestKey, opts ...grpc.CallOption) (*GetKeyResponse, error)
 	KillKey(ctx context.Context, in *RequestKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error)
 	PermKillKey(ctx context.Context, in *RequestPermKillKey, opts ...grpc.CallOption) (*GenericKillResponse, error)
+	TimedKillKey(ctx context.Context, in *RequestTimedKillKey, opts ...grpc.CallOption) (*TimedKillResponse, error)
 	GetServerInfo(ctx context.Context, in *RequestServerInfo, opts ...grpc.CallOption) (*GetServerInfoResponse, error)
 }
 
@@ -59,6 +60,15 @@ func (c *apiKeyServerClient) PermKillKey(ctx context.Context, in *RequestPermKil
 	return out, nil
 }
 
+func (c *apiKeyServerClient) TimedKillKey(ctx context.Context, in *RequestTimedKillKey, opts ...grpc.CallOption) (*TimedKillResponse, error) {
+	out := new(TimedKillResponse)
+	err := c.cc.Invoke(ctx, "/apikeyserver.ApiKeyServer/TimedKillKey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiKeyServerClient) GetServerInfo(ctx context.Context, in *RequestServerInfo, opts ...grpc.CallOption) (*GetServerInfoResponse, error) {
 	out := new(GetServerInfoResponse)
 	err := c.cc.Invoke(ctx, "/apikeyserver.ApiKeyServer/GetServerInfo", in, out, opts...)
@@ -75,6 +85,7 @@ type ApiKeyServerServer interface {
 	GetKey(context.Context, *RequestKey) (*GetKeyResponse, error)
 	KillKey(context.Context, *RequestKillKey) (*GenericKillResponse, error)
 	PermKillKey(context.Context, *RequestPermKillKey) (*GenericKillResponse, error)
+	TimedKillKey(context.Context, *RequestTimedKillKey) (*TimedKillResponse, error)
 	GetServerInfo(context.Context, *RequestServerInfo) (*GetServerInfoResponse, error)
 	mustEmbedUnimplementedApiKeyServerServer()
 }
@@ -91,6 +102,9 @@ func (UnimplementedApiKeyServerServer) KillKey(context.Context, *RequestKillKey)
 }
 func (UnimplementedApiKeyServerServer) PermKillKey(context.Context, *RequestPermKillKey) (*GenericKillResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PermKillKey not implemented")
+}
+func (UnimplementedApiKeyServerServer) TimedKillKey(context.Context, *RequestTimedKillKey) (*TimedKillResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TimedKillKey not implemented")
 }
 func (UnimplementedApiKeyServerServer) GetServerInfo(context.Context, *RequestServerInfo) (*GetServerInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerInfo not implemented")
@@ -162,6 +176,24 @@ func _ApiKeyServer_PermKillKey_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiKeyServer_TimedKillKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestTimedKillKey)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiKeyServerServer).TimedKillKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/apikeyserver.ApiKeyServer/TimedKillKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiKeyServerServer).TimedKillKey(ctx, req.(*RequestTimedKillKey))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiKeyServer_GetServerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RequestServerInfo)
 	if err := dec(in); err != nil {
@@ -198,6 +230,10 @@ var ApiKeyServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PermKillKey",
 			Handler:    _ApiKeyServer_PermKillKey_Handler,
+		},
+		{
+			MethodName: "TimedKillKey",
+			Handler:    _ApiKeyServer_TimedKillKey_Handler,
 		},
 		{
 			MethodName: "GetServerInfo",

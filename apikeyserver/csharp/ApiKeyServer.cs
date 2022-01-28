@@ -39,25 +39,32 @@ namespace Apikeyserver {
             "IkwKDlJlcXVlc3RLaWxsS2V5EhEKCXJlcXVlc3RlchgBIAEoCRILCgNrZXkY",
             "AiABKAkSDAoEbmFtZRgDIAEoCRIMCgR0aW1lGAQgASgDIlAKElJlcXVlc3RQ",
             "ZXJtS2lsbEtleRIRCglyZXF1ZXN0ZXIYASABKAkSCwoDa2V5GAIgASgJEgwK",
-            "BG5hbWUYAyABKAkSDAoEdGltZRgEIAEoAyIzChNHZW5lcmljS2lsbFJlc3Bv",
-            "bnNlEg4KBnJlc3VsdBgBIAEoCBIMCgR0aW1lGAIgASgDIqMCChVHZXRTZXJ2",
-            "ZXJJbmZvUmVzcG9uc2USFQoNc2VydmVyVmVyc2lvbhgBIAEoCRIWCg5rZXlF",
-            "eGhhdXN0aW9ucxgCIAEoDRIgChh0b3RhbEF2YWlsYWJsZVVzZXNQZXJNaW4Y",
-            "AyABKAQSFwoPdG90YWxLZXlzU2VydmVkGAQgASgEEhcKD3RvdGFsS2V5c0tp",
-            "bGxlZBgFIAEoBBIbChNrZXlOYW1lc1Blcm1hS2lsbGVkGAYgASgJEi8KBWl0",
-            "ZW1zGAcgAygLMiAuYXBpa2V5c2VydmVyLktleURldGFpbHNSZXNwb25zZRIM",
-            "CgR0aW1lGAggASgDEg4KBnVwdGltZRgJIAEoAxIbChNhdmdLZXlzU2VydmVk",
-            "UGVyTWluGAogASgCIl4KEktleURldGFpbHNSZXNwb25zZRIMCgRuYW1lGAEg",
-            "ASgJEg0KBXR5cGVzGAIgASgJEgwKBHVzZXMYAyABKA0SDQoFa2lsbHMYBCAB",
-            "KA0SDgoGYWN0aXZlGAUgASgIMs8CCgxBcGlLZXlTZXJ2ZXISQgoGR2V0S2V5",
-            "EhguYXBpa2V5c2VydmVyLlJlcXVlc3RLZXkaHC5hcGlrZXlzZXJ2ZXIuR2V0",
-            "S2V5UmVzcG9uc2UiABJMCgdLaWxsS2V5EhwuYXBpa2V5c2VydmVyLlJlcXVl",
-            "c3RLaWxsS2V5GiEuYXBpa2V5c2VydmVyLkdlbmVyaWNLaWxsUmVzcG9uc2Ui",
-            "ABJUCgtQZXJtS2lsbEtleRIgLmFwaWtleXNlcnZlci5SZXF1ZXN0UGVybUtp",
-            "bGxLZXkaIS5hcGlrZXlzZXJ2ZXIuR2VuZXJpY0tpbGxSZXNwb25zZSIAElcK",
-            "DUdldFNlcnZlckluZm8SHy5hcGlrZXlzZXJ2ZXIuUmVxdWVzdFNlcnZlcklu",
-            "Zm8aIy5hcGlrZXlzZXJ2ZXIuR2V0U2VydmVySW5mb1Jlc3BvbnNlIgBCJgoE",
-            "bWFpbkIMYXBpS2V5U2VydmVyUAFaDi4vYXBpa2V5c2VydmVyYgZwcm90bzM="));
+            "BG5hbWUYAyABKAkSDAoEdGltZRgEIAEoAyJlChNSZXF1ZXN0VGltZWRLaWxs",
+            "S2V5EhEKCXJlcXVlc3RlchgBIAEoCRILCgNrZXkYAiABKAkSDAoEbmFtZRgD",
+            "IAEoCRIMCgR0aW1lGAQgASgDEhIKCnJldHVyblRpbWUYBSABKAMiMwoTR2Vu",
+            "ZXJpY0tpbGxSZXNwb25zZRIOCgZyZXN1bHQYASABKAgSDAoEdGltZRgCIAEo",
+            "AyJfChFUaW1lZEtpbGxSZXNwb25zZRIxCgZyZXN1bHQYASABKAsyIS5hcGlr",
+            "ZXlzZXJ2ZXIuR2VuZXJpY0tpbGxSZXNwb25zZRIXCg9yZXR1cm5Ub1NlcnZp",
+            "Y2UYAiABKAMiowIKFUdldFNlcnZlckluZm9SZXNwb25zZRIVCg1zZXJ2ZXJW",
+            "ZXJzaW9uGAEgASgJEhYKDmtleUV4aGF1c3Rpb25zGAIgASgNEiAKGHRvdGFs",
+            "QXZhaWxhYmxlVXNlc1Blck1pbhgDIAEoBBIXCg90b3RhbEtleXNTZXJ2ZWQY",
+            "BCABKAQSFwoPdG90YWxLZXlzS2lsbGVkGAUgASgEEhsKE2tleU5hbWVzUGVy",
+            "bWFLaWxsZWQYBiABKAkSLwoFaXRlbXMYByADKAsyIC5hcGlrZXlzZXJ2ZXIu",
+            "S2V5RGV0YWlsc1Jlc3BvbnNlEgwKBHRpbWUYCCABKAMSDgoGdXB0aW1lGAkg",
+            "ASgDEhsKE2F2Z0tleXNTZXJ2ZWRQZXJNaW4YCiABKAIiXgoSS2V5RGV0YWls",
+            "c1Jlc3BvbnNlEgwKBG5hbWUYASABKAkSDQoFdHlwZXMYAiABKAkSDAoEdXNl",
+            "cxgDIAEoDRINCgVraWxscxgEIAEoDRIOCgZhY3RpdmUYBSABKAgypQMKDEFw",
+            "aUtleVNlcnZlchJCCgZHZXRLZXkSGC5hcGlrZXlzZXJ2ZXIuUmVxdWVzdEtl",
+            "eRocLmFwaWtleXNlcnZlci5HZXRLZXlSZXNwb25zZSIAEkwKB0tpbGxLZXkS",
+            "HC5hcGlrZXlzZXJ2ZXIuUmVxdWVzdEtpbGxLZXkaIS5hcGlrZXlzZXJ2ZXIu",
+            "R2VuZXJpY0tpbGxSZXNwb25zZSIAElQKC1Blcm1LaWxsS2V5EiAuYXBpa2V5",
+            "c2VydmVyLlJlcXVlc3RQZXJtS2lsbEtleRohLmFwaWtleXNlcnZlci5HZW5l",
+            "cmljS2lsbFJlc3BvbnNlIgASVAoMVGltZWRLaWxsS2V5EiEuYXBpa2V5c2Vy",
+            "dmVyLlJlcXVlc3RUaW1lZEtpbGxLZXkaHy5hcGlrZXlzZXJ2ZXIuVGltZWRL",
+            "aWxsUmVzcG9uc2UiABJXCg1HZXRTZXJ2ZXJJbmZvEh8uYXBpa2V5c2VydmVy",
+            "LlJlcXVlc3RTZXJ2ZXJJbmZvGiMuYXBpa2V5c2VydmVyLkdldFNlcnZlcklu",
+            "Zm9SZXNwb25zZSIAQiYKBG1haW5CDGFwaUtleVNlcnZlclABWg4uL2FwaWtl",
+            "eXNlcnZlcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.FieldMaskReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -68,7 +75,9 @@ namespace Apikeyserver {
             new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.KeyResponseTypeNames), global::Apikeyserver.KeyResponseTypeNames.Parser, new[]{ "TypeName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.RequestKillKey), global::Apikeyserver.RequestKillKey.Parser, new[]{ "Requester", "Key", "Name", "Time" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.RequestPermKillKey), global::Apikeyserver.RequestPermKillKey.Parser, new[]{ "Requester", "Key", "Name", "Time" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.RequestTimedKillKey), global::Apikeyserver.RequestTimedKillKey.Parser, new[]{ "Requester", "Key", "Name", "Time", "ReturnTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.GenericKillResponse), global::Apikeyserver.GenericKillResponse.Parser, new[]{ "Result", "Time" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.TimedKillResponse), global::Apikeyserver.TimedKillResponse.Parser, new[]{ "Result", "ReturnToService" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.GetServerInfoResponse), global::Apikeyserver.GetServerInfoResponse.Parser, new[]{ "ServerVersion", "KeyExhaustions", "TotalAvailableUsesPerMin", "TotalKeysServed", "TotalKeysKilled", "KeyNamesPermaKilled", "Items", "Time", "Uptime", "AvgKeysServedPerMin" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Apikeyserver.KeyDetailsResponse), global::Apikeyserver.KeyDetailsResponse.Parser, new[]{ "Name", "Types_", "Uses", "Kills", "Active" }, null, null, null, null)
           }));
@@ -1469,6 +1478,256 @@ namespace Apikeyserver {
   }
 
   /// <summary>
+  /// Request a key be killed for until t Time
+  /// </summary>
+  public sealed partial class RequestTimedKillKey : pb::IMessage<RequestTimedKillKey> {
+    private static readonly pb::MessageParser<RequestTimedKillKey> _parser = new pb::MessageParser<RequestTimedKillKey>(() => new RequestTimedKillKey());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RequestTimedKillKey> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestTimedKillKey() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestTimedKillKey(RequestTimedKillKey other) : this() {
+      requester_ = other.requester_;
+      key_ = other.key_;
+      name_ = other.name_;
+      time_ = other.time_;
+      returnTime_ = other.returnTime_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestTimedKillKey Clone() {
+      return new RequestTimedKillKey(this);
+    }
+
+    /// <summary>Field number for the "requester" field.</summary>
+    public const int RequesterFieldNumber = 1;
+    private string requester_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Requester {
+      get { return requester_; }
+      set {
+        requester_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "key" field.</summary>
+    public const int KeyFieldNumber = 2;
+    private string key_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Key {
+      get { return key_; }
+      set {
+        key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 3;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "time" field.</summary>
+    public const int TimeFieldNumber = 4;
+    private long time_;
+    /// <summary>
+    /// unixNano
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Time {
+      get { return time_; }
+      set {
+        time_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "returnTime" field.</summary>
+    public const int ReturnTimeFieldNumber = 5;
+    private long returnTime_;
+    /// <summary>
+    /// time when key will be returned to service
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ReturnTime {
+      get { return returnTime_; }
+      set {
+        returnTime_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RequestTimedKillKey);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RequestTimedKillKey other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Requester != other.Requester) return false;
+      if (Key != other.Key) return false;
+      if (Name != other.Name) return false;
+      if (Time != other.Time) return false;
+      if (ReturnTime != other.ReturnTime) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Requester.Length != 0) hash ^= Requester.GetHashCode();
+      if (Key.Length != 0) hash ^= Key.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Time != 0L) hash ^= Time.GetHashCode();
+      if (ReturnTime != 0L) hash ^= ReturnTime.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Requester.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Requester);
+      }
+      if (Key.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Key);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
+      if (Time != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(Time);
+      }
+      if (ReturnTime != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(ReturnTime);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Requester.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Requester);
+      }
+      if (Key.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Time != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time);
+      }
+      if (ReturnTime != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ReturnTime);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RequestTimedKillKey other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Requester.Length != 0) {
+        Requester = other.Requester;
+      }
+      if (other.Key.Length != 0) {
+        Key = other.Key;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Time != 0L) {
+        Time = other.Time;
+      }
+      if (other.ReturnTime != 0L) {
+        ReturnTime = other.ReturnTime;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Requester = input.ReadString();
+            break;
+          }
+          case 18: {
+            Key = input.ReadString();
+            break;
+          }
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 32: {
+            Time = input.ReadInt64();
+            break;
+          }
+          case 40: {
+            ReturnTime = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   /// response for RequestKillKey and RequestPermKillKey
   /// </summary>
   public sealed partial class GenericKillResponse : pb::IMessage<GenericKillResponse> {
@@ -1479,7 +1738,7 @@ namespace Apikeyserver {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1631,6 +1890,172 @@ namespace Apikeyserver {
 
   }
 
+  public sealed partial class TimedKillResponse : pb::IMessage<TimedKillResponse> {
+    private static readonly pb::MessageParser<TimedKillResponse> _parser = new pb::MessageParser<TimedKillResponse>(() => new TimedKillResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<TimedKillResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TimedKillResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TimedKillResponse(TimedKillResponse other) : this() {
+      result_ = other.result_ != null ? other.result_.Clone() : null;
+      returnToService_ = other.returnToService_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TimedKillResponse Clone() {
+      return new TimedKillResponse(this);
+    }
+
+    /// <summary>Field number for the "result" field.</summary>
+    public const int ResultFieldNumber = 1;
+    private global::Apikeyserver.GenericKillResponse result_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Apikeyserver.GenericKillResponse Result {
+      get { return result_; }
+      set {
+        result_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "returnToService" field.</summary>
+    public const int ReturnToServiceFieldNumber = 2;
+    private long returnToService_;
+    /// <summary>
+    ///unixNano
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ReturnToService {
+      get { return returnToService_; }
+      set {
+        returnToService_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as TimedKillResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(TimedKillResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Result, other.Result)) return false;
+      if (ReturnToService != other.ReturnToService) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (result_ != null) hash ^= Result.GetHashCode();
+      if (ReturnToService != 0L) hash ^= ReturnToService.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (result_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Result);
+      }
+      if (ReturnToService != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(ReturnToService);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (result_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Result);
+      }
+      if (ReturnToService != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ReturnToService);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(TimedKillResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.result_ != null) {
+        if (result_ == null) {
+          Result = new global::Apikeyserver.GenericKillResponse();
+        }
+        Result.MergeFrom(other.Result);
+      }
+      if (other.ReturnToService != 0L) {
+        ReturnToService = other.ReturnToService;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (result_ == null) {
+              Result = new global::Apikeyserver.GenericKillResponse();
+            }
+            input.ReadMessage(Result);
+            break;
+          }
+          case 16: {
+            ReturnToService = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   /// <summary>
   /// response for RequestServerInfo
   /// </summary>
@@ -1642,7 +2067,7 @@ namespace Apikeyserver {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2039,7 +2464,7 @@ namespace Apikeyserver {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Apikeyserver.ApiKeyServerReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

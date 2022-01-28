@@ -46,6 +46,7 @@ type Keys struct {
 		MaxPerMinute       uint32   `yaml:"max_per_minute"`
 		Tornkey            string   `yaml:"tornkey"`
 		CurrentlyRemaining int32    `yaml:"currently_remaining"`
+		ReturnToService    int64    // unixNano - point at which key will automatically be returned to available status
 		Types              []string `yaml:"types"`
 		Active             bool     `yaml:"active"`
 		Kills              uint32
@@ -70,6 +71,10 @@ func initKeys(keys *Keys) {
 
 	keys.TotalPerMinute = 0
 	for i := range keys.Apikeys {
+		timeNow := getTime()
+		if keys.Apikeys[i].ReturnToService <= timeNow {
+			keys.Apikeys[i].Active = true
+		}
 		if keys.Apikeys[i].Active {
 			keys.TotalPerMinute += keys.Apikeys[i].MaxPerMinute
 		}
@@ -160,6 +165,7 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *apikeyserver.GetKe
 				Exhausted: false,
 			}
 		} else if acceptExhaustion {
+			keys.TotalExhaustions++
 			return &apikeyserver.GetKeyResponse{
 				Time:      time.Now().UnixNano(),
 				Exhausted: true,
@@ -224,6 +230,21 @@ func permKillKey(keys *Keys, keyToKill string) {
 			keys.Apikeys[i].CurrentlyRemaining = 0
 			keys.Apikeys[i].Kills += 1
 			keys.Apikeys[i].Active = false
+		}
+	}
+}
+
+func tempKillKey(keys *Keys, keyToKill string, timeToKill int64) {
+	defer timeTrack(time.Now(), "tempKillKey")
+	Log.Debug().Caller().
+		Str("key", keyToKill).
+		Str("return_to_service", strconv.FormatInt(timeToKill, 10)).
+		Msg("tempKillKey()")
+	for i := range keys.Apikeys {
+		if keys.Apikeys[i].Tornkey == keyToKill {
+			keys.Apikeys[i].CurrentlyRemaining = 0
+			keys.Apikeys[i].Active = false
+			keys.Apikeys[i].ReturnToService = timeToKill
 		}
 	}
 }

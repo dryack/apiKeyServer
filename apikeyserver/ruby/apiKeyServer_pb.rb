@@ -43,9 +43,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 3
       optional :time, :int64, 4
     end
+    add_message "apikeyserver.RequestTimedKillKey" do
+      optional :requester, :string, 1
+      optional :key, :string, 2
+      optional :name, :string, 3
+      optional :time, :int64, 4
+      optional :returnTime, :int64, 5
+    end
     add_message "apikeyserver.GenericKillResponse" do
       optional :result, :bool, 1
       optional :time, :int64, 2
+    end
+    add_message "apikeyserver.TimedKillResponse" do
+      optional :result, :message, 1, "apikeyserver.GenericKillResponse"
+      optional :returnToService, :int64, 2
     end
     add_message "apikeyserver.GetServerInfoResponse" do
       optional :serverVersion, :string, 1
@@ -77,7 +88,9 @@ module Apikeyserver
   KeyResponseTypeNames = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.KeyResponseTypeNames").msgclass
   RequestKillKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.RequestKillKey").msgclass
   RequestPermKillKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.RequestPermKillKey").msgclass
+  RequestTimedKillKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.RequestTimedKillKey").msgclass
   GenericKillResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.GenericKillResponse").msgclass
+  TimedKillResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.TimedKillResponse").msgclass
   GetServerInfoResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.GetServerInfoResponse").msgclass
   KeyDetailsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("apikeyserver.KeyDetailsResponse").msgclass
 end
