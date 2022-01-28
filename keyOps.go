@@ -165,6 +165,7 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *apikeyserver.GetKe
 				Exhausted: false,
 			}
 		} else if acceptExhaustion {
+			keys.TotalExhaustions++
 			return &apikeyserver.GetKeyResponse{
 				Time:      time.Now().UnixNano(),
 				Exhausted: true,

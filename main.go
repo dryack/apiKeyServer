@@ -38,7 +38,7 @@ import (
 	"time"
 )
 
-const serverVersion = "v1.28"
+const serverVersion = "v1.31"
 
 var (
 	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
