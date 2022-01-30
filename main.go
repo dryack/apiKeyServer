@@ -109,8 +109,10 @@ func main() {
 		panic(err)
 	}
 
-	t = time.Now().UTC().UnixMilli() + 60000 // 1 minute
+	t = time.Now().UTC().UnixNano() + 60000000000 // 1 minute
 	initKeys(&keys)
+	keys.StartupTime = time.Now()
+	keys.ServerVersion = serverVersion
 
 	err = startMessages(tabWriter, err) // print server startup info to stdout
 

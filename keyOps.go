@@ -61,14 +61,6 @@ func initKeys(keys *Keys) {
 	mutexKeys.Lock()
 	defer mutexKeys.Unlock()
 
-	if keys.StartupTime.UnixNano() == 0 {
-		keys.StartupTime = time.Now()
-	}
-
-	if keys.ServerVersion == "" {
-		keys.ServerVersion = serverVersion
-	}
-
 	keys.TotalPerMinute = 0
 	for i := range keys.Apikeys {
 		timeNow := getTime()
@@ -283,8 +275,8 @@ func collectServerInfo(keys *Keys, req *apikeyserver.RequestServerInfo) *apikeys
 	res := &apikeyserver.GetServerInfoResponse{
 		ServerVersion:            serverVersion,
 		KeyExhaustions:           keys.TotalExhaustions,
-		TotalAvailableUsesPerMin: keys.TotalKeysServed,
-		TotalKeysServed:          uint64(keys.TotalPerMinute),
+		TotalAvailableUsesPerMin: uint64(keys.TotalPerMinute),
+		TotalKeysServed:          keys.TotalKeysServed,
 		TotalKeysKilled:          getTotalKills(keys),
 		KeyNamesPermaKilled:      strings.Join(permKilled, ", "),
 		Items:                    keyDetails,
