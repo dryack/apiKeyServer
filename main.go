@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"github.com/spf13/viper"
 	"github.com/tebeka/atexit"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -99,6 +100,12 @@ func init() {
 
 func main() {
 	tabWriter := tabwriter.NewWriter(os.Stdout, 0, 8, 1, ' ', 0)
+	viper.SetConfigName("config")
+	viper.SetConfigType("yaml")
+	viper.AddConfigPath("./")
+	viper.AddConfigPath("./configs/")
+	viper.AddConfigPath("/config/")
+
 	file, err := ioutil.ReadFile("./configs/config.yaml")
 	if err != nil {
 		panic(err)
