@@ -58,9 +58,6 @@ var (
 	mutexKeys = sync.RWMutex{}
 )
 
-// TODO: Integrate Viper for config management, including live reload (?)
-// https://github.com/spf13/viper
-
 // TODO: Consider the implications of:
 // As others have said, init is not commonly used for this. One thing it can be useful for is initializing global
 // variables that require more than one expression. However, you can also accomplish this with a function call:
@@ -106,7 +103,7 @@ func main() {
 	viper.AddConfigPath("./")
 	viper.AddConfigPath("./configs/")
 	viper.AddConfigPath("/config/")
-	//TODO: log he location of the active configuration
+	//TODO: log the location of the active configuration
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			//TODO:  needs to be logged
