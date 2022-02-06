@@ -21,7 +21,6 @@ package main
 import (
 	"apiKeyServer/apikeyserver"
 	"context"
-	"fmt"
 	"github.com/mennanov/fmutils"
 	"strconv"
 )
@@ -61,7 +60,7 @@ func (s *server) GetKey(ctx context.Context, request *apikeyserver.RequestKey) (
 	//	Exhausted: responseStruct.exhausted,
 	//	Items:     keysLeft,
 	// }
-	fmt.Println(res.Items)
+	// fmt.Println(res.Items) //DEBUG
 	fmutils.Filter(res, request.FieldMask.GetPaths())
 	return res, nil
 }

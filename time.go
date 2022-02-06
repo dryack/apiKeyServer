@@ -36,7 +36,7 @@ func checkMinute(keys *Keys) {
 			Log.Debug().Caller().Msg("checkMinute()")
 			newT := getTime()
 			if newT > t {
-				t = newT + 60000 // 1 minute (using UnixMilli() )
+				t = newT + 60000000000 // 1 minute (using UnixNano())
 				initKeys(keys)
 			}
 		}

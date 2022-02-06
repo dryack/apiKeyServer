@@ -20,10 +20,8 @@ import (
 	pb "apiKeyServer/apikeyserver"
 	"flag"
 	"fmt"
-	"github.com/fsnotify/fsnotify"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"github.com/spf13/viper"
 	"github.com/tebeka/atexit"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -41,6 +39,7 @@ import (
 const serverVersion = "v1.31"
 
 var (
+	// TODO: move tls, certFile, keyFile, port to config management
 	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	certFile = flag.String("cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("key_file", "", "The TLS key file")
@@ -97,37 +96,14 @@ func init() {
 func main() {
 	tabWriter := tabwriter.NewWriter(os.Stdout, 0, 8, 1, ' ', 0)
 
-	// configuration handling
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./")
-	viper.AddConfigPath("./configs/")
-	viper.AddConfigPath("/config/")
-	//TODO: log the location of the active configuration
-	if err := viper.ReadInConfig(); err != nil {
-		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			//TODO:  needs to be logged
-			fmt.Errorf("Config file not found")
-			os.Exit(1)
-		} else {
-			_ = fmt.Errorf("Fatal error with config file: %w\n", err)
-			os.Exit(1)
-		}
-	}
-	viper.OnConfigChange(func(e fsnotify.Event) {
-		//TODO: will need to be sending to logfile
-		fmt.Println("Config file changed: ", e.Name)
-	})
-	viper.WatchConfig()
-	err := viper.Unmarshal(&keys)
+	err := doConfiguration()
 	if err != nil {
-		//TODO: needs to be logged
-		fmt.Errorf("unable to decode into struct, %v", err)
 		os.Exit(1)
 	}
-	// end configuration handling
 
-	t = time.Now().UTC().UnixMilli() + 60000 // 1 minute
+	t = time.Now().UTC().UnixMilli() + 60000000000 // 1 minute
+	keys.StartupTime = time.Now()
+	keys.ServerVersion = serverVersion
 	initKeys(&keys)
 
 	err = startMessages(tabWriter, err) // print server startup info to stdout
