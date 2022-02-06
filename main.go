@@ -20,6 +20,7 @@ import (
 	pb "apiKeyServer/apikeyserver"
 	"flag"
 	"fmt"
+	"github.com/fsnotify/fsnotify"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
@@ -27,8 +28,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/testdata"
-	"gopkg.in/yaml.v3"
-	"io/ioutil"
 	"net"
 	"os"
 	"os/signal"
@@ -100,21 +99,36 @@ func init() {
 
 func main() {
 	tabWriter := tabwriter.NewWriter(os.Stdout, 0, 8, 1, ' ', 0)
+
+	// configuration handling
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath("./")
 	viper.AddConfigPath("./configs/")
 	viper.AddConfigPath("/config/")
-
-	file, err := ioutil.ReadFile("./configs/config.yaml")
-	if err != nil {
-		panic(err)
+	//TODO: log he location of the active configuration
+	if err := viper.ReadInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+			//TODO:  needs to be logged
+			fmt.Errorf("Config file not found")
+			os.Exit(1)
+		} else {
+			_ = fmt.Errorf("Fatal error with config file: %w\n", err)
+			os.Exit(1)
+		}
 	}
-
-	err = yaml.Unmarshal(file, &keys)
+	viper.OnConfigChange(func(e fsnotify.Event) {
+		//TODO: will need to be sending to logfile
+		fmt.Println("Config file changed: ", e.Name)
+	})
+	viper.WatchConfig()
+	err := viper.Unmarshal(&keys)
 	if err != nil {
-		panic(err)
+		//TODO: needs to be logged
+		fmt.Errorf("unable to decode into struct, %v", err)
+		os.Exit(1)
 	}
+	// end configuration handling
 
 	t = time.Now().UTC().UnixMilli() + 60000 // 1 minute
 	initKeys(&keys)

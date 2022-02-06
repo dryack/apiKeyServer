@@ -42,16 +42,16 @@ type Keys struct {
 	ServerVersion    string
 	StartupTime      time.Time
 	Apikeys          []struct {
-		User               string   `yaml:"user"`
-		MaxPerMinute       uint32   `yaml:"max_per_minute"`
-		Tornkey            string   `yaml:"tornkey"`
-		CurrentlyRemaining int32    `yaml:"currently_remaining"`
+		User               string   `mapstructure:"user"`
+		MaxPerMinute       uint32   `mapstructure:"max_per_minute"`
+		Tornkey            string   `mapstructure:"tornkey"`
+		CurrentlyRemaining int32    `mapstructure:"currently_remaining"`
 		ReturnToService    int64    // unixNano - point at which key will automatically be returned to available status
-		Types              []string `yaml:"types"`
-		Active             bool     `yaml:"active"`
+		Types              []string `mapstructure:"types"`
+		Active             bool     `mapstructure:"active"`
 		Kills              uint32
 		Uses               uint32
-	} `yaml:"apikeys"`
+	} `yaml:"mapstructure"`
 }
 
 func initKeys(keys *Keys) {
