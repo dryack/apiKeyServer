@@ -20,7 +20,6 @@ package main
 
 import (
 	"apiKeyServer/apikeyserver"
-	"fmt"
 	"github.com/mennanov/fmutils"
 	"strconv"
 	"strings"
@@ -144,8 +143,6 @@ func next(keys *Keys, keyType string, acceptExhaustion bool) *apikeyserver.GetKe
 		if anyLeft(*keys, keyType) {
 			key, name := levelKeyUses(keys, keyType)
 			// stolen from: https://stackoverflow.com/questions/16331063/how-can-i-get-the-string-representation-of-a-struct
-			keysForSample := fmt.Sprintf("%v", keys.Apikeys)
-			Sampled.Debug().Msg(keysForSample)
 
 			keyTypesRemaining := getKeyTypesRemaining(keys, keyType)
 			return &apikeyserver.GetKeyResponse{

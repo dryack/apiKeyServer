@@ -21,7 +21,6 @@ import (
 	"flag"
 	"fmt"
 	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 	"github.com/tebeka/atexit"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -48,8 +47,7 @@ var (
 	keys Keys
 	t    int64
 	// Log setting up the logger object for global access
-	Log     zerolog.Logger
-	Sampled zerolog.Logger
+	Log zerolog.Logger
 	// Set up ticker and teardown of go routine
 	Done   = make(chan bool)                        // necessary because we can't pass args to exitHandler()
 	Ticker = time.NewTicker(250 * time.Millisecond) // set up ticker for checking the minute
@@ -71,7 +69,7 @@ func init() {
 	consoleLogging := flag.Bool("console", false, "display to console in addition to log")
 	debug := flag.Bool("debug", false, "sets log level to debug")
 	flag.Parse()
-
+	// TODO: configure log location in config management
 	logfile, err := os.OpenFile("./apikeyserver.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		panic(err)
@@ -80,9 +78,7 @@ func init() {
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	if *debug {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
-		Sampled = log.Sample(&zerolog.BasicSampler{N: 10})
 	}
-
 	if *consoleLogging {
 		consoleWriter := zerolog.ConsoleWriter{Out: os.Stdout}
 		multi := zerolog.MultiLevelWriter(consoleWriter, logfile)
