@@ -68,7 +68,7 @@ message KeyResponseTypeNames {
     string typeName = 1;
 }
 
-// Request a key be unusable until the keys are re-initialized
+// Request a key be unusable until the keys are re-initialized (every minute)
 message RequestKillKey {
     string requester = 1;
     string key = 2;
